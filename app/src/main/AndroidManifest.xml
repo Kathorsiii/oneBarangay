@@ -2,6 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.myapplication">
 
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,6 +13,41 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication">
+        <activity
+            android:name=".ResidentUploadComplaintProofActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ResidentReserveAppointmentActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ResidentAppointmentDetailsActivity"
+            android:exported="true" />
+        <activity
+            android:name=".AppointmentListActivity"
+            android:exported="true"
+            android:label="@string/title_activity_appointment_list"
+            android:theme="@style/Theme.MyApplication.NoActionBar" />
+        <activity
+            android:name=".AdminComplaintDetailsActivity"
+            android:exported="true" />
+        <activity
+            android:name=".AdminAppointmentDetails"
+            android:exported="true" />
+        <activity
+            android:name=".ViewAppointmentActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ScanDocumentActivity"
+            android:exported="true" />
+        <activity
+            android:name=".EditUserProfileActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ChangePasswordActivity"
+            android:exported="true" />
+        <activity
+            android:name=".AddBulkScheduleActivity"
+            android:exported="true" />
         <activity
             android:name=".ProfileActivity"
             android:exported="true" />
@@ -32,7 +71,7 @@
             android:exported="true" />
         <activity
             android:name=".MainActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
     </application>
 
 </manifest>
