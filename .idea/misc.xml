@@ -18,11 +18,13 @@
         <entry key="..\:/NEW KOTLIN/oneBarangay/app/src/main/res/layout/activity_announcement_adapter.xml" value="0.371875" />
         <entry key="..\:/NEW KOTLIN/oneBarangay/app/src/main/res/layout/activity_change_password.xml" value="0.371875" />
         <entry key="..\:/NEW KOTLIN/oneBarangay/app/src/main/res/layout/activity_edit_user_profile.xml" value="0.371875" />
+        <entry key="..\:/NEW KOTLIN/oneBarangay/app/src/main/res/layout/activity_login.xml" value="0.25" />
         <entry key="..\:/NEW KOTLIN/oneBarangay/app/src/main/res/layout/activity_resident_add_complaint.xml" value="0.371875" />
         <entry key="..\:/NEW KOTLIN/oneBarangay/app/src/main/res/layout/activity_resident_appointment_details.xml" value="0.371875" />
         <entry key="..\:/NEW KOTLIN/oneBarangay/app/src/main/res/layout/activity_resident_reserve_appointment.xml" value="0.371875" />
         <entry key="..\:/NEW KOTLIN/oneBarangay/app/src/main/res/layout/activity_resident_upload_complaint_proof.xml" value="0.371875" />
         <entry key="..\:/NEW KOTLIN/oneBarangay/app/src/main/res/layout/activity_scan_document.xml" value="0.371875" />
+        <entry key="..\:/NEW KOTLIN/oneBarangay/app/src/main/res/layout/activity_sign_up.xml" value="0.2296875" />
         <entry key="..\:/NEW KOTLIN/oneBarangay/app/src/main/res/layout/activity_view_appointment.xml" value="0.371875" />
         <entry key="..\:/NEW KOTLIN/oneBarangay/app/src/main/res/layout/activity_view_complaints.xml" value="0.371875" />
         <entry key="..\:/NEW KOTLIN/oneBarangay/app/src/main/res/layout/announcement_custom_view.xml" value="0.25" />
@@ -43,6 +45,7 @@
         <entry key="..\:/NEW KOTLIN/oneBarangay/app/src/main/res/layout/sucess_dialog_reserve_appointment.xml" value="0.371875" />
         <entry key="..\:/NEW KOTLIN/oneBarangay/app/src/main/res/layout/warning_dialog_res_not_found.xml" value="0.371875" />
         <entry key="..\:/NEW KOTLIN/oneBarangay/app/src/main/res/menu/bottom_nav.xml" value="0.33" />
+        <entry key="..\:/NEW KOTLIN/oneBarangay/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.225" />
       </map>
     </option>
   </component>

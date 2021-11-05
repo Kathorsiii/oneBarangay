@@ -62,7 +62,7 @@
     <string name="alreadyHave">Already have an account? Sign In</string>
 
     <!--  For Login  -->
-    <string name="loginBtn">LOGIN</string>
+    <string name="loginBtn">Login</string>
     <string name="noAcccountYet">Don\'t have an account? Sign Up</string>
 
     <!-- For Services -->

@@ -49,7 +49,7 @@ class ProfileActivity : AppCompatActivity() {
             val email = firebaseUser.email
             // Set to text view
             binding.emailTV.text = email
-            readFireStoreData()
+//            readFireStoreData()
 
         } else {
             // If user is null, user if not logged in, go to Login Activity

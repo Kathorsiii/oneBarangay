@@ -8,6 +8,7 @@ import android.text.TextUtils
 import android.util.Patterns
 import android.widget.Toast
 import androidx.appcompat.app.ActionBar
+import com.example.myapplication.databinding.ActivityLoginBinding
 import com.example.myapplication.databinding.ActivitySignUpBinding
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_sign_up.*
@@ -32,6 +33,8 @@ class SignUpActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        binding = ActivitySignUpBinding.inflate(layoutInflater)
+
         setContentView(binding.root)
 
 //        signInLinkBtn.setOnClickListener {
@@ -53,6 +56,11 @@ class SignUpActivity : AppCompatActivity() {
         // Init firebaseAuth
         firebaseAuth = FirebaseAuth.getInstance()
 
+        // Handle click, open login activity
+        binding.signInLinkBtn.setOnClickListener {
+            startActivity(Intent(this, LoginActivity::class.java))
+        }
+
         // Handle click, begin sign up
         binding.signupBtn.setOnClickListener {
             // Validate credentials
@@ -73,9 +81,9 @@ class SignUpActivity : AppCompatActivity() {
         } else if (TextUtils.isEmpty(password)) {
             // No password entered
             binding.pwdSignupInput.error = "Please enter password"
-        } else if (password.length < 8) {
-            // Password length is less than 8
-            binding.pwdSignupInput.error = "Password must be 8 characters long"
+        } else if (password.length < 6) {
+            // Password length is less than 6
+            binding.pwdSignupInput.error = "Password must be 6 characters long"
         }
         else {
             // Credentials are checked, begin sign up
