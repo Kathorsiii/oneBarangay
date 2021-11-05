@@ -1,0 +1,131 @@
+<resources>
+    <string name="app_name">My Application</string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="dashboard">Dashboard</string>
+    <string name="services">Services</string>
+    <string name="notifications">Notification</string>
+    <string name="profile">Profile</string>
+
+    <string name="announcement">Announcement</string>
+
+    <!--  For User Profile XML  -->
+    <string name="fullName">Full Name</string>
+    <string name="userID">ID</string>
+    <string name="address">Address</string>
+    <string name="age">Age</string>
+    <string name="genderText">Gender</string>
+    <string name="contactNumber">Contact Number</string>
+    <string name="emailAddress">Email Address</string>
+
+    <string-array name="gender">
+        <item>Male</item>
+        <item>Female</item>
+    </string-array>
+
+    <!--  For Edit User Profile Activity  -->
+    <string name="title_activity_edit_user_profile">EditUserProfileActivity</string>
+    <string name="changePassword">Change Password</string>
+    <string name="edit">Edit</string>
+    <string name="done">Done</string>
+    <string name="cancel">Cancel</string>
+    <string name="editProfile">Edit Profile</string>
+
+    <!--  For Change Password  -->
+    <string name="currentPassword">Current Password</string>
+    <string name="newPassword">New Password</string>
+    <string name="confirmPassword">Confirm Password</string>
+
+    <!--  For Reserve Appointment  -->
+    <string name="setBtn">Set Date and Time</string>
+    <string name="typeofAppointment">Type of Appointment</string>
+    <string name="reserveAppointment">Reserve Appointment</string>
+    <string name="appointmentPurpose">Appointment Purpose</string>
+    <string name="reserveBtn">Reserve</string>
+    <string name="step1">Step 1. Schedule</string>
+    <string name="step2">Step 2. Document</string>
+    <string name="step3">Step 3. Verification</string>
+    <string name="schedule">Schedule</string>
+    <string name="totalAmount">Total Amount</string>
+    <string name="dateInterval">Date Interval</string>
+    <string name="timeInterval">Time Interval</string>
+
+    <string name="docuIndigency">Barangay Indigency</string>
+    <string name="docuLocalEmployment">Barangay Local Employment</string>
+    <string name="docuVerification">Barangay Verification</string>
+    <string name="docuClearance">Barangay Clearance</string>
+    <string name="docuCedula">Cedula</string>
+    <string name="brgyBorrow">Barangay Borrowing</string>
+
+    <!--  For Sign Up  -->
+    <string name="signupBtn">Sign Up</string>
+    <string name="alreadyHave">Already have an account? Sign In</string>
+
+    <!--  For Login  -->
+    <string name="loginBtn">LOGIN</string>
+    <string name="noAcccountYet">Don\'t have an account? Sign Up</string>
+
+    <!-- For Services -->
+    <string name="vAppointment">View Appointment</string>
+    <string name="vComplaints">View Complaints</string>
+    <string name="bSched">Bulk Schedule</string>
+    <string name="sDocu">Scan Document</string>
+
+    <!--  For Complaints  -->
+    <string name="viewComplaintsTitle">View Complaints</string>
+    <string name="complaintDetails">Complaint Details</string>
+    <string name="addComplaintTitle">Add Complaint</string>
+    <string name="complaintType">Complaint Type</string>
+    <string name="complaintsText">Select Complaint</string>
+    <string name="streetText">Street</string>
+    <string name="contactPlaceholder">Enter Contact</string>
+    <string name="streetPlaceholder">Select Area</string>
+    <string name="narrativePlaceholder">Enter your complaint</string>
+    <string name="uploadProofText">Upload Proof</string>
+    <string name="addComplaint">Add Complaint</string>
+    <string name="uploadProof">Upload Proof</string>
+    <string name="image">Image</string>
+    <string name="complaintNarrative">Complaint Narrative</string>
+
+    <string name="imageUpload">Image Upload</string>
+    <string name="takePic">Take a Picture</string>
+    <string name="submit">Submit</string>
+
+    <!--    For Bulk Schedule-->
+    <string name="eventText">Select Event</string>
+    <string name="noResidents">Enter number</string>
+    <string name="timeText">Time Interval</string>
+    <string name="areaText">Enter Street</string>
+    <string name="householdText">Household Member</string>
+    <string name="eventType">Event Type</string>
+
+    <string name="notifPush">Push</string>
+    <string name="notifEmail">Email</string>
+    <string name="notifApp">App</string>
+
+    <!-- For OCR -->
+    <string name="no_text_found">No text found in the image.</string>
+    <string name="task_cancelled">Task Cancelled</string>
+
+    <!--  For View and Reschedule Appointments  -->
+    <string name="appointment">Appointment</string>
+    <string name="appointmentDet">Appointment Details</string>
+    <string name="date">Date</string>
+    <string name="time">Time</string>
+    <string name="purpose">Purpose</string>
+    <string name="docuType">Document Type</string>
+    <string name="verification">Verification</string>
+    <string name="reschedBtn">Reschedule</string>
+
+    <!-- For Dialogs -->
+    <string name="successTitle">Success</string>
+    <string name="error">Error</string>
+    <string name="okay">Okay</string>
+    <string name="close">Close</string>
+    <string name="successDesc">You have successfully scheduled a bulk appointment!</string>
+    <string name="successReSchedApptmntDesc">You have successfully rescheduled an appointment!</string>
+    <string name="reportDesc">You have successfully reported!</string>
+    <string name="cancelApptmntDesc">You have successfully cancelled an appointment!</string>
+    <string name="resNotFnd">Resident not found!</string>
+    <string name="successReserveApptmnt">You have successfully reserved an appointment!</string>
+</resources>
