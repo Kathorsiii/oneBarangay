@@ -40,9 +40,10 @@
                     android:textSize="26sp" />
 
                 <Button
-                    android:id="@+id/addCompaintBtn"
+                    android:id="@+id/addComplaintBtn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    app:icon="@drawable/ic_baseline_add_24"
                     android:text="Add"
                     style="@style/Widget.MaterialComponents.Button.Icon"
                     android:layout_gravity="center_vertical"/>

@@ -9,6 +9,7 @@ import android.util.Patterns
 import android.widget.Toast
 import androidx.appcompat.app.ActionBar
 import com.example.myapplication.databinding.ActivityLoginBinding
+import com.example.myapplication.fragments.DashboardFragment
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_login.*
 
