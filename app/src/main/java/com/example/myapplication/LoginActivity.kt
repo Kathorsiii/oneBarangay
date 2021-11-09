@@ -93,7 +93,7 @@ class LoginActivity : AppCompatActivity() {
                 Toast.makeText(this, "Logged In as $email", Toast.LENGTH_SHORT).show()
 
                 // Open Profile
-                startActivity(Intent(this, ProfileActivity::class.java))
+                startActivity(Intent(this, MainActivity::class.java))
                 finish()
 
             }
@@ -111,7 +111,7 @@ class LoginActivity : AppCompatActivity() {
 
         if (firebaseUser != null) {
             // User is already logged in
-            startActivity(Intent(this, ProfileActivity::class.java))
+            startActivity(Intent(this, MainActivity::class.java))
             finish()
         }
     }

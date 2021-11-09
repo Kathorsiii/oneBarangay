@@ -13,13 +13,6 @@ import com.github.dhaval2404.imagepicker.ImagePicker
 import com.google.mlkit.vision.common.InputImage
 import com.google.mlkit.vision.text.TextRecognition
 import kotlinx.android.synthetic.main.activity_resident_upload_complaint_proof.*
-import kotlinx.android.synthetic.main.activity_scan_document.*
-import kotlinx.android.synthetic.main.activity_scan_document.iv_selected_img
-import kotlinx.android.synthetic.main.activity_scan_document.ll_noselect_message
-import kotlinx.android.synthetic.main.activity_scan_document.progressBar
-import kotlinx.android.synthetic.main.activity_scan_document.scrollView
-import kotlinx.android.synthetic.main.activity_scan_document.tv_converted_text
-import kotlinx.android.synthetic.main.activity_scan_document.tv_img_details
 import java.io.IOException
 
 class ResidentUploadComplaintProofActivity : AppCompatActivity() {

@@ -8,14 +8,14 @@
     tools:context=".MainActivity"
     android:id="@+id/container">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Welcome user"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:textColor="@color/black"
-        android:layout_margin="20dp" />
+<!--    <TextView-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="Welcome user"-->
+<!--        android:textSize="24sp"-->
+<!--        android:textStyle="bold"-->
+<!--        android:textColor="@color/black"-->
+<!--        android:layout_margin="20dp" />-->
 
     <FrameLayout
         android:id="@+id/fragment_container"
@@ -23,15 +23,15 @@
         android:layout_height="match_parent"
         android:layout_above="@+id/nav_view">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_announcement"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="70dp"
-            android:layout_marginRight="20dp">
+<!--        <androidx.recyclerview.widget.RecyclerView-->
+<!--            android:id="@+id/rv_announcement"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginLeft="20dp"-->
+<!--            android:layout_marginTop="70dp"-->
+<!--            android:layout_marginRight="20dp">-->
 
-        </androidx.recyclerview.widget.RecyclerView>
+<!--        </androidx.recyclerview.widget.RecyclerView>-->
 
     </FrameLayout>
 

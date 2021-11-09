@@ -23,11 +23,6 @@
             android:name=".ResidentAppointmentDetailsActivity"
             android:exported="true" />
         <activity
-            android:name=".AppointmentListActivity"
-            android:exported="true"
-            android:label="@string/title_activity_appointment_list"
-            android:theme="@style/Theme.MyApplication.NoActionBar" />
-        <activity
             android:name=".AdminComplaintDetailsActivity"
             android:exported="true" />
         <activity
