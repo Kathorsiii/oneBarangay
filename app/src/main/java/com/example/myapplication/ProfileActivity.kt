@@ -29,6 +29,9 @@ class ProfileActivity : AppCompatActivity() {
         actionBar = supportActionBar!!
         actionBar.title = "Profile"
 
+        // Back button
+        actionBar.setDisplayHomeAsUpEnabled(true)
+
         // Init FirebaseAuth
         firebaseAuth = FirebaseAuth.getInstance()
         checkUser()
@@ -38,6 +41,7 @@ class ProfileActivity : AppCompatActivity() {
             firebaseAuth.signOut()
             checkUser()
         }
+
     }
 
     private fun checkUser() {
@@ -47,8 +51,10 @@ class ProfileActivity : AppCompatActivity() {
         if (firebaseUser != null) {
             // If user is not null, user is logged in, get the user info
             val email = firebaseUser.email
+
             // Set to text view
             binding.emailTV.text = email
+
 //            readFireStoreData()
 
         } else {
@@ -73,5 +79,10 @@ class ProfileActivity : AppCompatActivity() {
                     textViewResult.setText(result)
                 }
             }
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
     }
 }

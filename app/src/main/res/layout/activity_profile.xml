@@ -13,7 +13,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="You're Logged In as"
+        android:text="You're logged in as"
         style="@style/TextAppearance.MaterialComponents.Caption" />
 
     <TextView
@@ -35,6 +35,7 @@
         android:layout_marginTop="20dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Logout" />
+        android:text="Logout"
+        android:textAllCaps="false"/>
 
 </LinearLayout>

@@ -2,12 +2,30 @@ package com.example.myapplication
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.ActionBar
 
 class AddBulkScheduleActivity : AppCompatActivity() {
+
+    // ActionBar
+    private lateinit var actionBar: ActionBar
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_bulk_schedule)
+
+        // Actionbar
+        actionBar = supportActionBar!!
+        actionBar.title = "Bulk Schedule"
+
+        // Back button
+        actionBar.setDisplayHomeAsUpEnabled(true)
     }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
+    }
+
     private val typeofEvent = listOf("SAP", "Ayuda", "Vaccination")
 //        val adapter = ArrayAdapter(requireContext(), R.layout.event_list_item, typeofEvent)
 //

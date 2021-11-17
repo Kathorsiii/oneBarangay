@@ -28,6 +28,9 @@ class ResidentViewComplaintActivity : AppCompatActivity() {
         actionBar = supportActionBar!!
         actionBar.title = "View Complaints"
 
+        // Back button
+        actionBar.setDisplayHomeAsUpEnabled(true)
+
         // For Add Complaint Button
         addComplaintBtn.setOnClickListener {
             startActivity(Intent(this, ResidentAddComplaintActivity::class.java))
@@ -63,5 +66,10 @@ class ResidentViewComplaintActivity : AppCompatActivity() {
                 complaintAdapter.notifyDataSetChanged()
             }
         })
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
     }
 }

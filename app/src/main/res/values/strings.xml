@@ -6,6 +6,7 @@
     <string name="services">Services</string>
     <string name="notifications">Notification</string>
     <string name="profile">Profile</string>
+    <string name="dataViz">Data Visualization</string>
 
     <string name="announcement">Announcement</string>
 
@@ -137,4 +138,6 @@
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="title_activity_announcement">AnnouncementActivity</string>
+    <string name="title_activity_main2">MainActivity2</string>
 </resources>

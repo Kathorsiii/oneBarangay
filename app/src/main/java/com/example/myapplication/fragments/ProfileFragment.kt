@@ -1,42 +1,71 @@
 package com.example.myapplication.fragments
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import android.widget.AutoCompleteTextView
-import com.example.myapplication.LoginActivity
+import android.widget.Button
+import android.widget.TextView
 import com.example.myapplication.R
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_profile.*
-import kotlinx.android.synthetic.main.fragment_profile.*
 
 /**
  * A simple [Fragment] subclass.
  * create an instance of this fragment.
  */
+
 class ProfileFragment : Fragment() {
+
+    // FirebaseAuth
+    private lateinit var firebaseAuth: FirebaseAuth
+
+    private lateinit var email: TextView
+    private lateinit var contactNumber: TextView
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_profile, container, false)
 
-//        view.editUserProfileBtn.setOnClickListener {
-//            startActivity(Intent(context, EditUserProfileActivity::class.java))
-//        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
         super.onViewCreated(view, savedInstanceState)
 
-        val items = listOf("Male", "Female")
-        val adapter = ArrayAdapter(requireContext(), R.layout.dropdown_gender, items)
-        (gendDrop.editText as? AutoCompleteTextView)?.setAdapter(adapter)
+        firebaseAuth = FirebaseAuth.getInstance()
+
+        view.findViewById<Button>(R.id.logoutBtn).setOnClickListener {
+            firebaseAuth.signOut()
+            activity?.finish()
+        }
+    }
+
+    private fun readUserData() {
+        val db = FirebaseFirestore.getInstance()
+        db.collection("users")
+            .get()
+            .addOnCompleteListener {
+                val result: StringBuffer = StringBuffer()
+
+                if (it.isSuccessful) {
+                    for (document in it.result!!) {
+                        result.append(document.data.getValue("email")).append(" ")
+                            .append(document.data.getValue("contact_number")).append("\n")
+
+                    }
+                    textViewResult.setText(result)
+                }
+            }
+    }
+
+    override fun onStart() {
+        super.onStart()
 
     }
+
 }
