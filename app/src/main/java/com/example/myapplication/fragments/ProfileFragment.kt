@@ -45,23 +45,23 @@ class ProfileFragment : Fragment() {
         }
     }
 
-    private fun readUserData() {
-        val db = FirebaseFirestore.getInstance()
-        db.collection("users")
-            .get()
-            .addOnCompleteListener {
-                val result: StringBuffer = StringBuffer()
-
-                if (it.isSuccessful) {
-                    for (document in it.result!!) {
-                        result.append(document.data.getValue("email")).append(" ")
-                            .append(document.data.getValue("contact_number")).append("\n")
-
-                    }
-                    textViewResult.setText(result)
-                }
-            }
-    }
+//    private fun readUserData() {
+//        val db = FirebaseFirestore.getInstance()
+//        db.collection("users")
+//            .get()
+//            .addOnCompleteListener {
+//                val result: StringBuffer = StringBuffer()
+//
+//                if (it.isSuccessful) {
+//                    for (document in it.result!!) {
+//                        result.append(document.data.getValue("email")).append(" ")
+//                            .append(document.data.getValue("contact_number")).append("\n")
+//
+//                    }
+//                    emailTV.setText(result)
+//                }
+//            }
+//    }
 
     override fun onStart() {
         super.onStart()
