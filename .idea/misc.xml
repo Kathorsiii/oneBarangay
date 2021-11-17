@@ -14,6 +14,7 @@
         <entry key="..\:/NEW KOTLIN/oneBarangay/app/src/main/res/drawable/announcement_background.xml" value="0.3398148148148148" />
         <entry key="..\:/NEW KOTLIN/oneBarangay/app/src/main/res/drawable/bulk_schedule.xml" value="0.3398148148148148" />
         <entry key="..\:/NEW KOTLIN/oneBarangay/app/src/main/res/drawable/edit_icon.xml" value="0.2611111111111111" />
+        <entry key="..\:/NEW KOTLIN/oneBarangay/app/src/main/res/drawable/profile_filled.xml" value="0.2640625" />
         <entry key="..\:/NEW KOTLIN/oneBarangay/app/src/main/res/layout/activity_add_bulk_schedule.xml" value="0.371875" />
         <entry key="..\:/NEW KOTLIN/oneBarangay/app/src/main/res/layout/activity_admin_appointment_details.xml" value="0.371875" />
         <entry key="..\:/NEW KOTLIN/oneBarangay/app/src/main/res/layout/activity_admin_complaint_details.xml" value="0.371875" />
@@ -52,6 +53,7 @@
         <entry key="..\:/NEW KOTLIN/oneBarangay/app/src/main/res/layout/success_dialog_cancel_appointment.xml" value="0.371875" />
         <entry key="..\:/NEW KOTLIN/oneBarangay/app/src/main/res/layout/success_dialog_report.xml" value="0.371875" />
         <entry key="..\:/NEW KOTLIN/oneBarangay/app/src/main/res/layout/success_dialog_reschedule_appointment.xml" value="0.371875" />
+        <entry key="..\:/NEW KOTLIN/oneBarangay/app/src/main/res/layout/success_dialog_update_user.xml" value="0.371875" />
         <entry key="..\:/NEW KOTLIN/oneBarangay/app/src/main/res/layout/sucess_dialog_reserve_appointment.xml" value="0.371875" />
         <entry key="..\:/NEW KOTLIN/oneBarangay/app/src/main/res/layout/warning_dialog_res_not_found.xml" value="0.371875" />
         <entry key="..\:/NEW KOTLIN/oneBarangay/app/src/main/res/menu/bottom_nav.xml" value="0.33" />
