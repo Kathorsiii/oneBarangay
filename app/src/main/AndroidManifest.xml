@@ -19,8 +19,11 @@
             android:usesCleartextTraffic="true"
             tools:targetApi="m">
         <activity
-                android:name=".DataVizActivity"
-                android:exported="true" />
+            android:name=".AnnouncementDisplayActivity"
+            android:exported="true" />
+        <activity
+            android:name=".DataVisualizationActivity"
+            android:exported="true" />
         <activity
             android:name=".ServicesActivity"
             android:exported="true" />
