@@ -22,8 +22,6 @@ class AnnouncementActivity : AppCompatActivity() {
     // ActionBar
     private lateinit var actionBar: ActionBar
 
-    // New
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_announcement)
