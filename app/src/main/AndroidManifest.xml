@@ -14,6 +14,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication">
         <activity
+            android:name=".AnnouncementDisplayActivity"
+            android:exported="true" />
+        <activity
             android:name=".DataVisualizationActivity"
             android:exported="true" />
         <activity
@@ -45,9 +48,6 @@
             android:exported="true" />
         <activity
             android:name=".ScanDocumentActivity"
-            android:exported="true" />
-        <activity
-            android:name=".EditUserProfileActivity"
             android:exported="true" />
         <activity
             android:name=".ChangePasswordActivity"
