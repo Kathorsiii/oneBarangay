@@ -103,7 +103,9 @@ class ProfileActivity : AppCompatActivity() {
                 ))
                 .addOnSuccessListener {
                     Log.d(TAG, "DocumentSnapshot successfully updated!")
-                    val view = View.inflate(this@ProfileActivity, R.layout.success_dialog_update_user, null)
+                    val view = View.inflate(this@ProfileActivity,
+                        R.layout.success_dialog_update_user,
+                        null)
                     val builder = AlertDialog.Builder(this@ProfileActivity)
                     builder.setView(view)
 
@@ -115,8 +117,8 @@ class ProfileActivity : AppCompatActivity() {
                         dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
                     }
                 }
-                .addOnFailureListener {
-                        e -> Log.w(TAG, "Error updating document", e)
+                .addOnFailureListener { e ->
+                    Log.w(TAG, "Error updating document", e)
                 }
         }
 
