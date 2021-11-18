@@ -55,11 +55,8 @@
                 android:name=".ViewAppointmentActivity"
                 android:exported="true" />
         <activity
-                android:name=".ScanDocumentActivity"
-                android:exported="true" />
-        <activity
-                android:name=".EditUserProfileActivity"
-                android:exported="true" />
+            android:name=".ChangePasswordActivity"
+            android:exported="true" />
         <activity
                 android:name=".ChangePasswordActivity"
                 android:exported="true" />
