@@ -26,6 +26,9 @@
                 android:exported="true" />
         <activity
                 android:name=".DataVisualizationActivity"
+        <activity
+            android:name=".ResidentUploadComplaintProofActivity"
+            android:exported="true" />
                 android:exported="true" />
         <activity
                 android:name=".ServicesActivity"
@@ -64,9 +67,6 @@
                 android:exported="true">
 
         </activity>
-        <activity
-                android:name=".ResidentViewComplaintActivity"
-                android:exported="true" />
         <activity
                 android:name=".ResidentAddComplaintActivity"
                 android:exported="true" >

@@ -4,7 +4,6 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.appcompat.app.ActionBar
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_services.*
 
 class ServicesActivity : AppCompatActivity() {
@@ -29,7 +28,7 @@ class ServicesActivity : AppCompatActivity() {
         }
 
         viewReportsBtn.setOnClickListener {
-            val intent = Intent(this, ResidentViewComplaintActivity::class.java)
+            val intent = Intent(this, ViewComplaintActivity::class.java)
             startActivity(intent)
         }
 
