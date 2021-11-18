@@ -42,10 +42,12 @@ class SignUpActivity : AppCompatActivity() {
 //        }
 
         // ActionBar that has enabled back button
-        actionBar = supportActionBar!!
-        actionBar.title = "Sign up"
-        actionBar.setDisplayHomeAsUpEnabled(true)
-        actionBar.setDisplayShowHomeEnabled(true)
+//        actionBar = supportActionBar!!
+//        actionBar.title = "Sign up"
+//        actionBar.setDisplayHomeAsUpEnabled(true)
+//        actionBar.setDisplayShowHomeEnabled(true)
+
+        supportActionBar?.hide()
 
         // Progress Dialog
         progressDialog = ProgressDialog(this)
