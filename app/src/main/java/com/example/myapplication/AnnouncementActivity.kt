@@ -22,8 +22,6 @@ class AnnouncementActivity : AppCompatActivity() {
     // ActionBar
     private lateinit var actionBar: ActionBar
 
-    // New
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_announcement)
@@ -71,7 +69,14 @@ class AnnouncementActivity : AppCompatActivity() {
     }
 
     private fun listItemClicked(announcement: AnnouncementData) {
-        Toast.makeText(this,
-            "Supplier name is ${announcement.title}", Toast.LENGTH_LONG).show()
+//        Toast.makeText(this,
+//            "Supplier name is ${announcement.title}", Toast.LENGTH_LONG).show()
+
+        val intent = Intent(this, AnnouncementDisplayActivity::class.java)
+        intent.putExtra("title", announcement.title)
+        intent.putExtra("body", announcement.body)
+//        intent.putExtra("creation_date", announcement.creation_date).toString()
+        intent.putExtra("thumbnail", announcement.thumbnail)
+        startActivity(intent)
     }
 }
