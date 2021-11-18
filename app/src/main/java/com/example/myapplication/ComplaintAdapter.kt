@@ -3,15 +3,15 @@ package com.example.myapplication
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ExpandableListView
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.complaint_custom_view.view.*
+import kotlin.collections.ArrayList
+
 
 class ComplaintAdapter(
     private val complaintList: ArrayList<ComplaintData>,
-    private val clickListener: (ComplaintData) -> Unit
+    private val clickListener: (ComplaintData) -> Unit,
 ) : RecyclerView.Adapter<ComplaintAdapter.ComplaintViewHolder>() {
 
     override fun onCreateViewHolder(
@@ -41,10 +41,18 @@ class ComplaintAdapter(
             itemView.complaint_fullName.text = complaint.complainant_name
             itemView.complaint_type.text = complaint.complaint_type
             itemView.complaint_status.text = complaint.complaint_status
+            itemView.complaint_date.text = complaint.date?.toDate().toString()
+
+//            val sfd = SimpleDateFormat("dd-MM-yyyy HH:mm:ss")
+//            sfd.format(Date(timestamp))
 
             Picasso.get()
                 .load(complaint.image_url)
                 .into(itemView.complaint_img)
+
+            itemView.setOnClickListener {
+                clickListener(complaint)
+            }
         }
 
 //        val complaintType: TextView = itemView.findViewById(R.id.complaint_type)

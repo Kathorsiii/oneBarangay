@@ -46,6 +46,8 @@ class ViewComplaintActivity : AppCompatActivity() {
         complaintAdapter = ComplaintAdapter(complaintList,
             { selectedComplaintItem: ComplaintData -> listItemClicked(selectedComplaintItem) })
 
+        recyclerView.adapter = complaintAdapter
+
         getComplaintData()
     }
 
@@ -56,7 +58,10 @@ class ViewComplaintActivity : AppCompatActivity() {
             .addOnSuccessListener { result ->
                 for (document in result) {
                     complaintList.add(document.toObject(ComplaintData::class.java))
-                    println(complaintList)
+
+//                    var date = document.getDate("date")
+
+//                    println(date)
 //                    Log.d(TAG, "${document.id} => ${document.data}")
                 }
                 complaintAdapter.notifyDataSetChanged()
@@ -64,15 +69,17 @@ class ViewComplaintActivity : AppCompatActivity() {
     }
 
     private fun listItemClicked(complaint: ComplaintData) {
-        Toast.makeText(this,
-            "Supplier name is ${complaint.complainant_name}", Toast.LENGTH_LONG).show()
+//        Toast.makeText(this,
+//            "Supplier name is ${complaint.complainant_name}", Toast.LENGTH_LONG).show()
 
-//        val intent = Intent(this, AnnouncementDisplayActivity::class.java)
-//        intent.putExtra("title", announcement.title)
-//        intent.putExtra("body", announcement.body)
-////        intent.putExtra("creation_date", announcement.creation_date).toString()
-//        intent.putExtra("thumbnail", announcement.thumbnail)
-//        startActivity(intent)
+        val intent = Intent(this, ComplaintDisplayActivity::class.java)
+        intent.putExtra("complainant_name", complaint.complainant_name)
+        intent.putExtra("complaint_type", complaint.complaint_type)
+        intent.putExtra("comment", complaint.comment)
+        intent.putExtra("contact_number", complaint.contact_number)
+        intent.putExtra("complaint_date", complaint.date?.toDate().toString())
+        intent.putExtra("image_url", complaint.image_url)
+        startActivity(intent)
     }
 
     override fun onSupportNavigateUp(): Boolean {
