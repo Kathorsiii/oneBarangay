@@ -19,8 +19,16 @@ class ResidentAddComplaintActivity : AppCompatActivity() {
         actionBar = supportActionBar!!
         actionBar.title = "Add Complaint"
 
+        // Back button
+        actionBar.setDisplayHomeAsUpEnabled(true)
+
         uploadProofImage.setOnClickListener {
             startActivity(Intent(this, ResidentUploadComplaintProofActivity::class.java))
         }
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
     }
 }

@@ -1,21 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".fragments.ServicesFragment"
-    android:id="@+id/serviceRL">
+    tools:context=".ServicesActivity">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
         android:id="@+id/servicesTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="42dp"
-        android:layout_marginTop="42dp"
-        android:layout_marginEnd="42dp"
         android:layout_marginBottom="42dp"
         android:text="@string/services"
         android:textColor="@color/black"
@@ -30,11 +24,14 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:layout_marginTop="100dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
         android:gravity="center_horizontal"
         android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@+id/servicesTxt">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -47,12 +44,12 @@
                 style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                 android:layout_width="@dimen/box_size_btn"
                 android:layout_height="@dimen/box_size_btn"
-                android:drawableTop="@drawable/view_appointment"
-                android:text="@string/vAppointment"
-                android:textColor="@android:color/black"
-                android:textAllCaps="false"
-                android:padding="15dp"
                 android:layout_marginRight="5dp"
+                android:drawableTop="@drawable/view_appointment"
+                android:padding="15dp"
+                android:text="@string/vAppointment"
+                android:textAllCaps="false"
+                android:textColor="@android:color/black"
                 app:cornerRadius="8dp" />
 
             <Button
@@ -81,12 +78,12 @@
                 style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                 android:layout_width="@dimen/box_size_btn"
                 android:layout_height="@dimen/box_size_btn"
-                android:drawableTop="@drawable/bulk_schedule"
-                android:text="@string/bSched"
-                android:textColor="@android:color/black"
-                android:textAllCaps="false"
-                android:padding="15dp"
                 android:layout_marginRight="5dp"
+                android:drawableTop="@drawable/bulk_schedule"
+                android:padding="15dp"
+                android:text="@string/bSched"
+                android:textAllCaps="false"
+                android:textColor="@android:color/black"
                 app:cornerRadius="8dp" />
 
             <Button
@@ -94,16 +91,17 @@
                 style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                 android:layout_width="@dimen/box_size_btn"
                 android:layout_height="@dimen/box_size_btn"
-                android:drawableTop="@drawable/scan_document"
-                android:text="@string/sDocu"
-                android:textColor="@android:color/black"
-                android:textAllCaps="false"
-                android:padding="15dp"
                 android:layout_marginLeft="5dp"
+                android:drawableTop="@drawable/scan_document"
+                android:padding="15dp"
+                android:text="@string/sDocu"
+                android:textAllCaps="false"
+                android:textColor="@android:color/black"
                 app:cornerRadius="8dp" />
 
         </LinearLayout>
 
     </LinearLayout>
 
-</RelativeLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
