@@ -18,8 +18,9 @@
         <entry key="..\:/NEW KOTLIN/oneBarangay/app/src/main/res/layout/activity_add_bulk_schedule.xml" value="0.371875" />
         <entry key="..\:/NEW KOTLIN/oneBarangay/app/src/main/res/layout/activity_admin_appointment_details.xml" value="0.371875" />
         <entry key="..\:/NEW KOTLIN/oneBarangay/app/src/main/res/layout/activity_admin_complaint_details.xml" value="0.371875" />
-        <entry key="..\:/NEW KOTLIN/oneBarangay/app/src/main/res/layout/activity_announcement.xml" value="0.371875" />
+        <entry key="..\:/NEW KOTLIN/oneBarangay/app/src/main/res/layout/activity_announcement.xml" value="0.25" />
         <entry key="..\:/NEW KOTLIN/oneBarangay/app/src/main/res/layout/activity_announcement_adapter.xml" value="0.371875" />
+        <entry key="..\:/NEW KOTLIN/oneBarangay/app/src/main/res/layout/activity_announcement_display.xml" value="0.2859375" />
         <entry key="..\:/NEW KOTLIN/oneBarangay/app/src/main/res/layout/activity_change_password.xml" value="0.371875" />
         <entry key="..\:/NEW KOTLIN/oneBarangay/app/src/main/res/layout/activity_data_visualization.xml" value="0.371875" />
         <entry key="..\:/NEW KOTLIN/oneBarangay/app/src/main/res/layout/activity_edit_user_profile.xml" value="0.371875" />
@@ -37,8 +38,9 @@
         <entry key="..\:/NEW KOTLIN/oneBarangay/app/src/main/res/layout/activity_sign_up.xml" value="0.2296875" />
         <entry key="..\:/NEW KOTLIN/oneBarangay/app/src/main/res/layout/activity_view_appointment.xml" value="0.371875" />
         <entry key="..\:/NEW KOTLIN/oneBarangay/app/src/main/res/layout/activity_view_complaints.xml" value="0.371875" />
-        <entry key="..\:/NEW KOTLIN/oneBarangay/app/src/main/res/layout/announcement_custom_view.xml" value="0.25" />
+        <entry key="..\:/NEW KOTLIN/oneBarangay/app/src/main/res/layout/announcement_custom_view.xml" value="0.33" />
         <entry key="..\:/NEW KOTLIN/oneBarangay/app/src/main/res/layout/announcement_dialog.xml" value="0.371875" />
+        <entry key="..\:/NEW KOTLIN/oneBarangay/app/src/main/res/layout/appointment_custom_view.xml" value="0.321875" />
         <entry key="..\:/NEW KOTLIN/oneBarangay/app/src/main/res/layout/appointment_list.xml" value="0.2972222222222222" />
         <entry key="..\:/NEW KOTLIN/oneBarangay/app/src/main/res/layout/bulk_sched_dropdown_event_type.xml" value="0.371875" />
         <entry key="..\:/NEW KOTLIN/oneBarangay/app/src/main/res/layout/bulk_sched_dropdown_relationship_type.xml" value="0.371875" />

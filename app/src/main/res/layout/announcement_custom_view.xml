@@ -36,26 +36,19 @@
             android:layout_toEndOf="@+id/announcement_img"
             android:text="Title"
             android:textSize="16sp"
+            android:textColor="@android:color/black"
             android:textStyle="bold" />
-
-<!--        <TextView-->
-<!--            android:id="@+id/announcement_created"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginStart="20dp"-->
-<!--            android:layout_marginTop="100dp"-->
-<!--            android:layout_toEndOf="@+id/announcement_img"-->
-<!--            android:text="Created"-->
-<!--            android:textSize="14sp" />-->
 
         <TextView
             android:id="@+id/announcement_desc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/announcement_title"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="150dp"
+            android:layout_marginTop="20dp"
             android:layout_toEndOf="@+id/announcement_img"
             android:text="Description"
+            android:textColor="@android:color/black"
             android:textSize="14sp" />
 
     </RelativeLayout>
