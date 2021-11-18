@@ -24,10 +24,12 @@ class AnnouncementDisplayActivity : AppCompatActivity() {
 
         val title = intent.getStringExtra("title")
         val body = intent.getStringExtra("body")
+        val creationDate = intent.getStringExtra("creation_date")
         val thumbnail = intent.getStringExtra("thumbnail")
 
         announcementDisplayTitle.text = title
         announcementDisplayDesc.text = body
+//        announcementDisplayDate.text = creationDate
         Picasso.get().load(thumbnail).into(announcementDisplayImage)
 
     }

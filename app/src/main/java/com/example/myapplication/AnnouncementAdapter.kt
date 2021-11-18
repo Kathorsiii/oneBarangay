@@ -33,6 +33,7 @@ class AnnouncementAdapter(private val announcementList: ArrayList<AnnouncementDa
         fun bind(announcement: AnnouncementData, clickListener: (AnnouncementData) -> Unit) {
             itemView.announcement_title.text = announcement.title
             itemView.announcement_desc.text = announcement.body?.take(120)
+            itemView.announcement_date.text = announcement.creation_date?.toDate().toString()
 
             Picasso.get()
                 .load(announcement.thumbnail)
