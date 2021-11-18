@@ -12,6 +12,7 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
 class AnnouncementActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityAnnouncementBinding
 
     // For Firestore
     private lateinit var recyclerView: RecyclerView
@@ -26,7 +27,11 @@ class AnnouncementActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_announcement)
+//        setContentView(R.layout.activity_announcement)
+
+        binding = ActivityAnnouncementBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
 
         // Actionbar
         actionBar = supportActionBar!!
