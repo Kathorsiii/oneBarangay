@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        package="com.example.myapplication">
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.example.myapplication">
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -10,17 +10,20 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 
     <application
-            android:allowBackup="true"
-            android:icon="@mipmap/ic_launcher"
-            android:label="@string/app_name"
-            android:roundIcon="@mipmap/ic_launcher_round"
-            android:supportsRtl="true"
-            android:theme="@style/Theme.MyApplication"
-            android:usesCleartextTraffic="true"
-            tools:targetApi="m">
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.MyApplication"
+        android:usesCleartextTraffic="true"
+        tools:targetApi="m">
         <activity
-                android:name=".DataVizActivity"
-                android:exported="true" />
+            android:name=".ComplaintDisplayActivity"
+            android:exported="true" />
+        <activity
+            android:name=".DataVizActivity"
+            android:exported="true" />
         <activity
             android:name=".ServicesActivity"
             android:exported="true" />
@@ -34,44 +37,44 @@
             android:name=".ResidentUploadComplaintProofActivity"
             android:exported="true" />
         <activity
-                android:name=".ResidentReserveAppointmentActivity"
-                android:exported="true" />
+            android:name=".ResidentReserveAppointmentActivity"
+            android:exported="true" />
         <activity
-                android:name=".ResidentAppointmentDetailsActivity"
-                android:exported="true" />
+            android:name=".ResidentAppointmentDetailsActivity"
+            android:exported="true" />
         <activity
-                android:name=".AdminComplaintDetailsActivity"
-                android:exported="true" />
+            android:name=".AdminComplaintDetailsActivity"
+            android:exported="true" />
         <activity
-                android:name=".AdminAppointmentDetails"
-                android:exported="true" />
+            android:name=".AdminAppointmentDetails"
+            android:exported="true" />
         <activity
-                android:name=".ViewAppointmentActivity"
-                android:exported="true" />
+            android:name=".ViewAppointmentActivity"
+            android:exported="true" />
         <activity
-                android:name=".ViewComplaintActivity"
-                android:exported="true" />
+            android:name=".ViewComplaintActivity"
+            android:exported="true" />
         <activity
-                android:name=".ScanDocumentActivity"
-                android:exported="true" />
+            android:name=".ScanDocumentActivity"
+            android:exported="true" />
         <activity
-                android:name=".EditUserProfileActivity"
-                android:exported="true" />
+            android:name=".EditUserProfileActivity"
+            android:exported="true" />
         <activity
-                android:name=".ChangePasswordActivity"
-                android:exported="true" />
+            android:name=".ChangePasswordActivity"
+            android:exported="true" />
         <activity
-                android:name=".AddBulkScheduleActivity"
-                android:exported="true" />
+            android:name=".AddBulkScheduleActivity"
+            android:exported="true" />
         <activity
-                android:name=".ProfileActivity"
-                android:exported="true" />
+            android:name=".ProfileActivity"
+            android:exported="true" />
         <activity
-                android:name=".SignUpActivity"
-                android:exported="true" />
+            android:name=".SignUpActivity"
+            android:exported="true" />
         <activity
-                android:name=".LoginActivity"
-                android:exported="true">
+            android:name=".LoginActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -79,11 +82,11 @@
             </intent-filter>
         </activity>
         <activity
-                android:name=".ResidentAddComplaintActivity"
-                android:exported="true" />
+            android:name=".ResidentAddComplaintActivity"
+            android:exported="true" />
         <activity
-                android:name=".MainActivity"
-                android:exported="true" />
+            android:name=".MainActivity"
+            android:exported="true" />
     </application>
 
 </manifest>
