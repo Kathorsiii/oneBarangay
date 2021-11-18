@@ -75,7 +75,7 @@ class AnnouncementActivity : AppCompatActivity() {
         val intent = Intent(this, AnnouncementDisplayActivity::class.java)
         intent.putExtra("title", announcement.title)
         intent.putExtra("body", announcement.body)
-        intent.putExtra("creationDate", announcement.creation_date)
+        intent.putExtra("creation_date", announcement.creation_date?.toDate().toString())
         intent.putExtra("thumbnail", announcement.thumbnail)
         startActivity(intent)
     }

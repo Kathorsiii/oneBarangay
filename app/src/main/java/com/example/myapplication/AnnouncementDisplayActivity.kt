@@ -22,15 +22,16 @@ class AnnouncementDisplayActivity : AppCompatActivity() {
         // Back button
         actionBar.setDisplayHomeAsUpEnabled(true)
 
-        val title = intent.getStringExtra("title")
-        val body = intent.getStringExtra("body")
+        val announcementTitle = intent.getStringExtra("title")
+        val announcementBody = intent.getStringExtra("body")
         val creationDate = intent.getStringExtra("creation_date")
-        val thumbnail = intent.getStringExtra("thumbnail")
+        val announcementThumbnail = intent.getStringExtra("thumbnail")
 
-        announcementDisplayTitle.text = title
-        announcementDisplayDesc.text = body
-//        announcementDisplayDate.text = creationDate
-        Picasso.get().load(thumbnail).into(announcementDisplayImage)
+        announcementDisplayTitle.text = announcementTitle
+        announcementDisplayDesc.text = announcementBody
+        announcementDisplayDate.text = creationDate
+
+        Picasso.get().load(announcementThumbnail).into(announcementDisplayImage)
 
     }
 
