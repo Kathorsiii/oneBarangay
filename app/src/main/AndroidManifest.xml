@@ -19,6 +19,9 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
         <activity
+            android:name=".AppointmentDisplayActivity"
+            android:exported="true" />
+        <activity
             android:name=".AnnouncementDisplayActivity"
             android:exported="true" />
         <activity
@@ -86,6 +89,9 @@
         </activity>
         <activity
             android:name=".ResidentAddComplaintActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ResidentViewComplaintActivity"
             android:exported="true" />
         <activity
             android:name=".MainActivity"
