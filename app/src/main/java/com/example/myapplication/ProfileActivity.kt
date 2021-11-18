@@ -84,28 +84,27 @@ class ProfileActivity : AppCompatActivity() {
 
                         Picasso.get().load(imageProfileURL).into(profileImageView)
 
-        binding.updateUserBtn.setOnClickListener {
-            // For Update
-            val updateUsers = db.collection("users").document(userID)
-                .update(mapOf(
-                    "address" to binding.addressUserInput.text.toString(),
-                    "contact_number" to binding.contactNumberUser.text.toString()
-                ))
-                .addOnSuccessListener {
-                    Log.d(TAG, "DocumentSnapshot successfully updated!")
-                    val view = View.inflate(this@ProfileActivity,
-                        R.layout.success_dialog_update_user,
-                        null)
-                    val builder = AlertDialog.Builder(this@ProfileActivity)
-                    builder.setView(view)
+                        binding.nameUserProfile.setText(fullName)
+                        binding.idTextInput.setText(document.getString("user_id"))
+                        binding.roleUserInput.setText(document.getString("role"))
+                        binding.emailAddressUser.setText(document.getString("email"))
+                        binding.addressUserInput.setText(document.getString("address"))
+                        binding.streetUserInput.setText(document.getString("street"))
+                        binding.contactNumberUser.setText(document.getString("contact_number"))
+//                    binding.ageUserInput.setText(document.getString("age"))
+                        binding.birthPlaceUser.setText(document.getString("birth_place"))
+                        binding.citizenshipUser.setText(document.getString("citizenship"))
+                        binding.civilStatusUser.setText(document.getString("civil_status"))
+                        binding.dateOfBirthUser.setText(document.getString("date_of_birth"))
+                        binding.monthlyIncomeUser.setText(document.getString("monthly_income"))
 
                         Log.d(TAG, "DocumentSnapshot data: ${document.data}")
                     } else {
                         Log.d(TAG, "No such document")
                     }
                 }
-                .addOnFailureListener { e ->
-                    Log.w(TAG, "Error updating document", e)
+                .addOnFailureListener { exception ->
+                    Log.d(TAG, "get failed with ", exception)
                 }
 
             // ====================================================== //
