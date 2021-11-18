@@ -70,18 +70,18 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Account Type"
-                    android:textColor="@android:color/black"
-                    android:textStyle="bold" />
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Document Status"
+                        android:textColor="@android:color/black"
+                        android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/appointmentAccountTypeText"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Account Type"
-                    android:textColor="@android:color/black" />
+                        android:id="@+id/appointmentDocumentStatus"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Document Status"
+                        android:textColor="@android:color/black" />
             </LinearLayout>
 
             <LinearLayout
