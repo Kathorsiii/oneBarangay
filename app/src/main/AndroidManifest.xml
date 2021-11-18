@@ -19,11 +19,11 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
         <activity
-            android:name=".AppointmentDisplayActivity"
-            android:exported="true" />
+                android:name=".AppointmentDisplayActivity"
+                android:exported="true" />
         <activity
-            android:name=".AnnouncementDisplayActivity"
-            android:exported="true" />
+                android:name=".AnnouncementDisplayActivity"
+                android:exported="true" />
         <activity
             android:name=".DataVisualizationActivity"
             android:exported="true"/>
@@ -37,29 +37,29 @@
             android:name=".ServicesActivity"
             android:exported="true" />
         <activity
-            android:name=".AnnouncementActivity"
-            android:exported="true" />
+                android:name=".AnnouncementActivity"
+                android:exported="true" />
         <activity
-            android:name=".NotificationActivity"
-            android:exported="true" />
+                android:name=".NotificationActivity"
+                android:exported="true" />
         <activity
-            android:name=".ResidentUploadComplaintProofActivity"
-            android:exported="true" />
+                android:name=".ResidentUploadComplaintProofActivity"
+                android:exported="true" />
         <activity
             android:name=".ResidentReserveAppointmentActivity"
             android:exported="true" />
         <activity
-            android:name=".ResidentAppointmentDetailsActivity"
-            android:exported="true" />
+                android:name=".ResidentAppointmentDetailsActivity"
+                android:exported="true" />
         <activity
-            android:name=".AdminComplaintDetailsActivity"
-            android:exported="true" />
+                android:name=".AdminComplaintDetailsActivity"
+                android:exported="true" />
         <activity
-            android:name=".AdminAppointmentDetails"
-            android:exported="true" />
+                android:name=".AdminAppointmentDetails"
+                android:exported="true" />
         <activity
-            android:name=".ViewAppointmentActivity"
-            android:exported="true" />
+                android:name=".ViewAppointmentActivity"
+                android:exported="true" />
         <activity
             android:name=".ViewComplaintActivity"
             android:exported="true" />
@@ -70,14 +70,14 @@
             android:name=".ChangePasswordActivity"
             android:exported="true" />
         <activity
-            android:name=".AddBulkScheduleActivity"
-            android:exported="true" />
+                android:name=".AddBulkScheduleActivity"
+                android:exported="true" />
         <activity
-            android:name=".ProfileActivity"
-            android:exported="true" />
+                android:name=".ProfileActivity"
+                android:exported="true" />
         <activity
-            android:name=".SignUpActivity"
-            android:exported="true" />
+                android:name=".SignUpActivity"
+                android:exported="true" />
         <activity
             android:name=".LoginActivity"
             android:exported="true">
@@ -94,8 +94,8 @@
             android:name=".ResidentViewComplaintActivity"
             android:exported="true" />
         <activity
-            android:name=".MainActivity"
-            android:exported="true" />
+                android:name=".MainActivity"
+                android:exported="true" />
     </application>
 
 </manifest>
