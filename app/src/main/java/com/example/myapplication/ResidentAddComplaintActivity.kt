@@ -76,7 +76,7 @@ class ResidentAddComplaintActivity : AppCompatActivity() {
 
         // Complaint Cancel Button
         complaintCancelBtn.setOnClickListener {
-            startActivity(Intent(this, ResidentViewComplaintActivity::class.java))
+            startActivity(Intent(this, ViewComplaintActivity::class.java))
         }
 
         // Init FirebaseAuth
@@ -207,7 +207,7 @@ class ResidentAddComplaintActivity : AppCompatActivity() {
                         dialog.dismiss()
                         dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
 
-                        val intent = Intent(this, ResidentViewComplaintActivity::class.java)
+                        val intent = Intent(this, ViewComplaintActivity::class.java)
                         startActivity(intent)
                     }
                 }

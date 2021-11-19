@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import kotlinx.android.synthetic.main.activity_view_complaint.*
 
 class ViewComplaintActivity : AppCompatActivity() {
 
@@ -32,10 +33,10 @@ class ViewComplaintActivity : AppCompatActivity() {
         // Back button
         actionBar.setDisplayHomeAsUpEnabled(true)
 
-//        addComplaintBtn.setOnClickListener {
-//            val intent = Intent(this, ResidentAddComplaintActivity::class.java)
-//            startActivity(intent)
-//        }
+        addComplaintBtn.setOnClickListener {
+            val intent = Intent(this, ResidentAddComplaintActivity::class.java)
+            startActivity(intent)
+        }
 
         recyclerView = findViewById(R.id.complaintViewRV)
         recyclerView.layoutManager = LinearLayoutManager(this)
