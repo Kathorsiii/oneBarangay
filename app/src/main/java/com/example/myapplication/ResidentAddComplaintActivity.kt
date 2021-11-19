@@ -2,33 +2,35 @@ package com.example.myapplication
 
 import android.app.AlertDialog
 import android.app.DatePickerDialog
+import android.app.ProgressDialog
 import android.app.TimePickerDialog
 import android.content.ContentValues.TAG
 import android.content.Intent
+import android.gesture.GestureLibraries.fromFile
+import android.net.Uri
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.ArrayAdapter
-import android.widget.Toast
-import androidx.appcompat.app.ActionBar
-import com.example.myapplication.databinding.ActivityResidentAddComplaintBinding
-import kotlinx.android.synthetic.main.activity_resident_add_complaint.*
-import android.widget.AutoCompleteTextView
 import android.widget.AdapterView.OnItemClickListener
+import android.widget.ArrayAdapter
+import android.widget.AutoCompleteTextView
+import android.widget.Toast
 import androidx.annotation.RequiresApi
+import androidx.appcompat.app.ActionBar
+import androidx.appcompat.app.AppCompatActivity
+import com.example.myapplication.databinding.ActivityResidentAddComplaintBinding
+import com.github.dhaval2404.imagepicker.ImagePicker
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.SetOptions
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import com.google.type.Date
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.ktx.storage
+import kotlinx.android.synthetic.main.activity_resident_add_complaint.*
 import kotlinx.android.synthetic.main.success_dialog_add_complaint.view.*
-import java.sql.Timestamp
-import java.time.LocalDateTime
-import java.time.ZoneId
+import java.io.File
 import java.util.*
-import kotlin.collections.hashMapOf as hashMapOf
 
 
 class ResidentAddComplaintActivity : AppCompatActivity() {
@@ -41,6 +43,9 @@ class ResidentAddComplaintActivity : AppCompatActivity() {
 
     // FirebaseAuth
     private lateinit var firebaseAuth: FirebaseAuth
+
+    // ProgressDialog
+    private lateinit var progressDialog: ProgressDialog
 
     private var complaintYear: Int = 0
     private var complaintMonth: Int = 0
@@ -55,6 +60,9 @@ class ResidentAddComplaintActivity : AppCompatActivity() {
 
     private lateinit var userData: Map<String, Any>
 
+    private var storage: FirebaseStorage = Firebase.storage("gs://onebarangay-media")
+    private lateinit var downloadUri: Uri
+
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -67,12 +75,14 @@ class ResidentAddComplaintActivity : AppCompatActivity() {
         actionBar = supportActionBar!!
         actionBar.title = "Add Complaint"
 
+        // ProgressDialog
+        progressDialog = ProgressDialog(this)
+        progressDialog.setTitle("Please wait")
+        progressDialog.setMessage("Uploading image...")
+        progressDialog.setCanceledOnTouchOutside(false)
+
         // Back button
         actionBar.setDisplayHomeAsUpEnabled(true)
-
-        uploadComplaintProofImage.setOnClickListener {
-            startActivity(Intent(this, ResidentUploadComplaintProofActivity::class.java))
-        }
 
         // Complaint Cancel Button
         complaintCancelBtn.setOnClickListener {
@@ -97,7 +107,8 @@ class ResidentAddComplaintActivity : AppCompatActivity() {
 
         // For Complaint Status Dropdown
         val complaintStatus = resources.getStringArray(R.array.complaint_status_list)
-        val complaintStatusAdapter = ArrayAdapter(this, R.layout.complaint_status_list_item, complaintStatus)
+        val complaintStatusAdapter =
+            ArrayAdapter(this, R.layout.complaint_status_list_item, complaintStatus)
         binding.complaintStatusInput.setAdapter(complaintStatusAdapter)
 
         var complaintSelectedValue: String = ""
@@ -118,6 +129,10 @@ class ResidentAddComplaintActivity : AppCompatActivity() {
 
                 // Toast.makeText(this, "Complaint Status: ${complaintStatusValue}", Toast.LENGTH_LONG).show()
             }
+
+        uploadComplaintProofImage.setOnClickListener {
+            openImagePicker()
+        }
 
         dateOfIncident()
 
@@ -160,8 +175,6 @@ class ResidentAddComplaintActivity : AppCompatActivity() {
             var complainantNumber = complainantNumberInput.text.toString()
             var complainantAddress = complainantAddressInput.text.toString()
             var complaintReason = complaintReasonInput.text.toString()
-            var complaintDate = complaintDateIncident.text
-            var complaintTime = complaintTimeIncident.text.toString()
 
 //            Toast.makeText(this,
 //                "Complainant Name: ${complainantNameText}" +
@@ -184,7 +197,8 @@ class ResidentAddComplaintActivity : AppCompatActivity() {
                 "date" to calendar.time,
                 "email" to email,
                 "house_num" to complainantHouseNum,
-                "user_id" to userID
+                "image_url" to downloadUri.toString(),
+                "user_id" to userID,
             )
 
             val complaintRef = db.collection("complaints").document()
@@ -195,8 +209,12 @@ class ResidentAddComplaintActivity : AppCompatActivity() {
                 .set(userComplaint, SetOptions.merge())
 
                 .addOnSuccessListener {
+
                     Log.d(TAG, "DocumentSnapshot successfully written!")
-                    val view = View.inflate(this@ResidentAddComplaintActivity, R.layout.success_dialog_add_complaint, null)
+
+                    val view = View.inflate(this@ResidentAddComplaintActivity,
+                        R.layout.success_dialog_add_complaint,
+                        null)
                     val builder = AlertDialog.Builder(this@ResidentAddComplaintActivity)
                     builder.setView(view)
 
@@ -217,7 +235,6 @@ class ResidentAddComplaintActivity : AppCompatActivity() {
                 }
         }
     }
-    // COMPLAINT IMAGE
 
     private fun dateOfIncident() {
         val calendar = Calendar.getInstance()
@@ -258,6 +275,81 @@ class ResidentAddComplaintActivity : AppCompatActivity() {
                 complaintHour = hourOfDay
                 complaintMinute = minute
             }, startHour, startMinute, false).show()
+        }
+    }
+
+    private fun openImagePicker() {
+        ImagePicker.with(this)
+            .crop()                    //Crop image(Optional), Check Customization for more option
+            .compress(1024)            //Final image size will be less than 1 MB(Optional)
+            .maxResultSize(1080,
+                1080)    //Final image resolution will be less than 1080 x 1080(Optional)
+            .start()
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        when (resultCode) {
+            RESULT_OK -> {
+                //Image Uri will not be null for RESULT_OK
+                val fileUri = data!!.data!!
+                binding.complaintSelectedImg.setImageURI(fileUri)
+                binding.complaintSelectedImg.visibility = View.VISIBLE
+//                setViewVisibility()
+
+                val storageRef = storage.reference
+                val file = Uri.fromFile(File(fileUri.path!!))
+                val imagesRef = storageRef.child("${file.lastPathSegment}")
+                val uploadTask = imagesRef.putFile(file)
+
+                progressDialog.show()
+
+                uploadTask.addOnFailureListener {
+                    Toast.makeText(this, it.message, Toast.LENGTH_LONG).show()
+                }.addOnSuccessListener { taskSnapshot ->
+
+                    val filename = taskSnapshot.metadata!!.name
+
+                    val urlTask = uploadTask.continueWithTask { task ->
+                        if (!task.isSuccessful) {
+                            task.exception?.let {
+                                Toast.makeText(this, it.message, Toast.LENGTH_LONG).show()
+                            }
+                        }
+                        imagesRef.downloadUrl
+                    }.addOnCompleteListener { task ->
+                        if (task.isSuccessful) {
+
+                            progressDialog.dismiss()
+
+                            // Photo URL
+                            downloadUri = task.result!!
+                            Toast.makeText(this,
+                                "Successfully added image!",
+                                Toast.LENGTH_LONG).show()
+
+                            binding.complaintDoneBtn.visibility = View.VISIBLE
+                            binding.complaintCancelBtn.visibility = View.VISIBLE
+
+                        } else {
+                            Toast.makeText(this, task.exception.toString(), Toast.LENGTH_LONG)
+                                .show()
+                        }
+                    }
+                }
+            }
+
+            ImagePicker.RESULT_ERROR -> {
+                Toast.makeText(this, ImagePicker.getError(data), Toast.LENGTH_LONG).show()
+            }
+
+            else -> {
+                Toast.makeText(
+                    this,
+                    resources.getString(R.string.task_cancelled),
+                    Toast.LENGTH_LONG
+                ).show()
+            }
         }
     }
 

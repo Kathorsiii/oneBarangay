@@ -141,7 +141,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
-                            android:text="Date of Incident" />
+                            android:text="Time of Incident" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -156,7 +156,11 @@
                             android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:ems="10"
-                            android:hint="MM/DD/YYYY" />
+                            android:hint="Select Date"
+                            android:textColor="@color/alphaBlue"
+                            android:textColorHint="@color/alphaBlue"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
 
                         <TextView
                             android:id="@+id/complaintTimeIncident"
@@ -164,7 +168,11 @@
                             android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:ems="10"
-                            android:hint="HH:MM" />
+                            android:hint="Select Time"
+                            android:textColor="@color/alphaBlue"
+                            android:textColorHint="@color/alphaBlue"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
                     </LinearLayout>
 
                     <com.google.android.material.textfield.TextInputLayout
@@ -254,10 +262,26 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/complaintReasonInput"
                         android:layout_width="match_parent"
-                        android:layout_height="203dp"
-                        android:inputType="text" />
+                        android:layout_height="wrap_content"
+                        android:autoSizeTextType="uniform"
+                        android:ellipsize="end"
+                        android:inputType="text"
+                        android:maxLines="10" />
 
                 </com.google.android.material.textfield.TextInputLayout>
+
+                <ImageView
+                    android:id="@+id/complaintSelectedImg"
+                    android:layout_width="@dimen/dimen_300dp"
+                    android:layout_height="@dimen/dimen_220dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/dimen_20dp"
+                    android:background="@drawable/white_filled_cornered_edge"
+                    android:contentDescription="@string/app_name"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <Button
                     android:id="@+id/uploadComplaintProofImage"
@@ -265,6 +289,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="40dp"
+                    android:layout_marginTop="20dp"
                     android:layout_marginRight="40dp"
                     android:layout_marginBottom="10dp"
                     android:gravity="center"
@@ -285,7 +310,8 @@
                         android:layout_marginRight="4dp"
                         android:backgroundTint="@color/alphaGray"
                         android:text="@string/cancel"
-                        android:textAllCaps="false" />
+                        android:textAllCaps="false"
+                        android:visibility="gone" />
 
                     <Button
                         android:id="@+id/complaintDoneBtn"
@@ -294,7 +320,8 @@
                         android:layout_marginLeft="4dp"
                         android:backgroundTint="@color/alphaBlue"
                         android:text="@string/done"
-                        android:textAllCaps="false" />
+                        android:textAllCaps="false"
+                        android:visibility="gone" />
 
                 </LinearLayout>
 
