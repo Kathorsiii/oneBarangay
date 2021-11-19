@@ -19,23 +19,23 @@
             android:usesCleartextTraffic="true"
             tools:targetApi="m">
         <activity
-            android:name=".AnnouncementDisplayActivity"
-            android:exported="true" />
+                android:name=".AppointmentDisplayActivity"
+                android:exported="true" />
         <activity
-            android:name=".DataVisualizationActivity"
-            android:exported="true" />
+                android:name=".AnnouncementDisplayActivity"
+                android:exported="true" />
         <activity
-            android:name=".ServicesActivity"
-            android:exported="true" />
+                android:name=".DataVisualizationActivity"
+                android:exported="true" />
         <activity
-            android:name=".AnnouncementActivity"
-            android:exported="true" />
+                android:name=".ServicesActivity"
+                android:exported="true" />
         <activity
-            android:name=".NotificationActivity"
-            android:exported="true" />
+                android:name=".AnnouncementActivity"
+                android:exported="true" />
         <activity
-            android:name=".ResidentUploadComplaintProofActivity"
-            android:exported="true" />
+                android:name=".NotificationActivity"
+                android:exported="true" />
         <activity
                 android:name=".ResidentReserveAppointmentActivity"
                 android:exported="true" >
