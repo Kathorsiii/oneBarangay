@@ -1,301 +1,310 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ResidentReserveAppointmentActivity">
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ResidentReserveAppointmentActivity">
 
     <TextView
-        android:id="@+id/reserveAppt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Reserve Appointment"
-        android:textColor="@color/black"
-        android:textSize="26sp"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="12dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.121"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.028" />
+            android:id="@+id/reserveAppt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Reserve Appointment"
+            android:textColor="@color/black"
+            android:textSize="26sp"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="12dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_bias="0.121"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.028" />
 
     <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginTop="32dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/reserveAppt"
-        app:layout_constraintVertical_bias="1.0">
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="32dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/reserveAppt"
+            app:layout_constraintVertical_bias="1.0">
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <LinearLayout
-                android:id="@+id/linearEventTitle4"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginStart="32dp"
-                android:layout_marginEnd="32dp"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/dateInterval" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/timeInterval" />
-            </LinearLayout>
-
-            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:layout_marginEnd="32dp"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/residentReserveAppt_Date"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:hint="MM/DD/YYYY"
-                    android:layout_weight="1"
-                    android:ems="10" />
-
-                <TextView
-                    android:id="@+id/residentReserveAppt_Time"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:hint="HH:MM"
-                    android:layout_weight="1"
-                    android:ems="10" />
-            </LinearLayout>
-
-            <Button
-                android:id="@+id/setDateBtn"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="32dp"
-                android:layout_marginBottom="5dp"
-                android:text="Set Date"
-                android:textAllCaps="false"/>
-
-            <Button
-                android:id="@+id/setTimeBtn"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:layout_marginEnd="32dp"
-                android:layout_marginBottom="20dp"
-                android:text="Set Time"
-                android:textAllCaps="false"/>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginStart="32dp"
-                android:layout_marginEnd="32dp"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="36dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/typeofAppointment" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:layout_marginEnd="32dp"
-                android:layout_marginBottom="20dp"
                 android:orientation="vertical">
 
-                <CheckBox
-                    android:id="@+id/docuIndigency"
+            <LinearLayout
+                    android:id="@+id/linearEventTitle4"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="@string/docuIndigency"
-                    android:checked="true"
-                    app:buttonTint="@color/alphaBlue" />
+                    android:layout_marginStart="32dp"
+                    android:layout_marginEnd="32dp"
+                    android:orientation="horizontal">
 
-                <CheckBox
-                    android:id="@+id/docuLocalEmployment"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="@string/docuLocalEmployment"
-                    app:buttonTint="@color/alphaBlue" />
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/dateInterval" />
 
-                <CheckBox
-                    android:id="@+id/docuVerification"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="@string/docuVerification"
-                    app:buttonTint="@color/alphaBlue" />
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/timeInterval" />
+            </LinearLayout>
 
-                <CheckBox
-                    android:id="@+id/docuClearance"
+            <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="@string/docuClearance"
-                    android:onClick="testClick"
-                    app:buttonTint="@color/alphaBlue" />
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginEnd="32dp"
+                    android:orientation="horizontal">
 
-                <CheckBox
-                    android:id="@+id/docuCedula"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="@string/docuCedula"
-                    app:buttonTint="@color/alphaBlue" />
+                <TextView
+                        android:id="@+id/residentReserveAppt_Date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:hint="MM/DD/YYYY"
+                        android:layout_weight="1"
+                        android:ems="10" />
 
-                <CheckBox
-                    android:id="@+id/brgyBorrow"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="@string/brgyBorrow"
-                    app:buttonTint="@color/alphaBlue" />
+                <TextView
+                        android:id="@+id/residentReserveAppt_Time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:hint="HH:MM"
+                        android:layout_weight="1"
+                        android:ems="10" />
+            </LinearLayout>
 
-                <CheckBox
-                    android:id="@+id/brgyCert"
+            <Button
+                    android:id="@+id/setDateBtn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="32dp"
+                    android:layout_marginBottom="5dp"
+                    android:text="Set Date"
+                    android:textAllCaps="false" />
+
+            <Button
+                    android:id="@+id/setTimeBtn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginEnd="32dp"
+                    android:layout_marginBottom="20dp"
+                    android:text="Set Time"
+                    android:textAllCaps="false" />
+
+            <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="Barangay Certificate"
-                    app:buttonTint="@color/alphaBlue" />
+                    android:layout_marginStart="32dp"
+                    android:layout_marginEnd="32dp"
+                    android:orientation="horizontal">
+
+                <TextView
+                        android:layout_width="36dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/typeofAppointment" />
 
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/linearApptPurpose"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginStart="32dp"
-                android:layout_marginEnd="32dp"
-                android:layout_marginBottom="20dp"
-                android:orientation="vertical"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent">
-
-                <TextView
-                    android:id="@+id/apptPurpose"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/appointmentPurpose" />
+                    android:layout_marginStart="32dp"
+                    android:layout_marginEnd="32dp"
+                    android:layout_marginBottom="20dp"
+                    android:orientation="vertical">
 
-                <com.google.android.material.textfield.TextInputLayout
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                <CheckBox
+                        android:id="@+id/docuIndigency"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/docuIndigency"
+                        android:checked="false"
+                        app:buttonTint="@color/alphaBlue"
+                        android:onClick="onCheckboxClicked" />
+
+                <CheckBox
+                        android:id="@+id/docuLocalEmployment"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/docuLocalEmployment"
+                        app:buttonTint="@color/alphaBlue"
+                        android:onClick="onCheckboxClicked" />
+
+                <CheckBox
+                        android:id="@+id/docuVerification"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/docuVerification"
+                        app:buttonTint="@color/alphaBlue"
+                        android:onClick="onCheckboxClicked" />
+
+                <CheckBox
+                        android:id="@+id/docuClearance"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/docuClearance"
+                        app:buttonTint="@color/alphaBlue"
+                        android:onClick="onCheckboxClicked" />
+
+                <CheckBox
+                        android:id="@+id/docuCedula"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/docuCedula"
+                        app:buttonTint="@color/alphaBlue"
+                        android:onClick="onCheckboxClicked" />
+
+                <CheckBox
+                        android:id="@+id/brgyBorrow"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/brgyBorrow"
+                        app:buttonTint="@color/alphaBlue"
+                        android:onClick="onCheckboxClicked" />
+
+                <CheckBox
+                        android:id="@+id/brgyCert"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="Barangay Certificate"
+                        app:buttonTint="@color/alphaBlue"
+                        android:onClick="onCheckboxClicked" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                    android:id="@+id/linearApptPurpose"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="4dp"
-                    android:layout_marginRight="4dp"
-                    app:errorEnabled="true"
-                    app:helperTextTextColor="#FF0000"
-                    app:hintEnabled="true"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginEnd="32dp"
+                    android:layout_marginBottom="20dp"
+                    android:orientation="vertical"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent">
 
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/appointmentPurposeInput"
+                <TextView
+                        android:id="@+id/apptPurpose"
                         android:layout_width="match_parent"
-                        android:layout_height="200dp" />
+                        android:layout_height="wrap_content"
+                        android:text="@string/appointmentPurpose" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="4dp"
+                        android:layout_marginRight="4dp"
+                        app:errorEnabled="true"
+                        app:helperTextTextColor="#FF0000"
+                        app:hintEnabled="true"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/appointmentPurposeInput"
+                            android:layout_width="match_parent"
+                            android:layout_height="200dp" />
 
                 </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/linearVerification"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginStart="32dp"
-                android:layout_marginEnd="32dp"
-                android:layout_marginBottom="10dp"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/verificationTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/verification"
-                    android:layout_marginBottom="10dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent" />
-
-                <LinearLayout
+                    android:id="@+id/linearVerification"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="horizontal">
+                    android:layout_marginStart="32dp"
+                    android:layout_marginEnd="32dp"
+                    android:layout_marginBottom="10dp"
+                    android:orientation="vertical">
+
+                <TextView
+                        android:visibility="gone"
+                        android:id="@+id/verificationTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/verification"
+                        android:layout_marginBottom="10dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        android:textStyle="bold" />
+
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
 
                     <ImageView
-                        android:id="@+id/appointmentImage"
-                        android:layout_width="wrap_content"
-                        android:layout_height="120dp"
-                        android:layout_weight="1"
-                        app:srcCompat="@drawable/dice" />
+                            android:visibility="gone"
+                            android:id="@+id/appointmentImage"
+                            android:layout_width="wrap_content"
+                            android:layout_height="120dp"
+                            android:layout_weight="1"
+                            app:srcCompat="@drawable/dice" />
 
                 </LinearLayout>
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:layout_marginEnd="32dp"
-                android:layout_marginBottom="16dp"
-                android:gravity="center"
-                android:orientation="vertical">
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginEnd="32dp"
+                    android:layout_marginBottom="16dp"
+                    android:gravity="center"
+                    android:orientation="vertical">
 
                 <Button
-                    android:id="@+id/uploadImageOrTakePic"
-                    android:layout_width="246dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    android:backgroundTint="@color/alphaBlue"
-                    android:text="Upload Image or Take a Picture"
-                    android:textAllCaps="false"/>
+                        android:id="@+id/uploadImageOrTakePic"
+                        android:layout_width="246dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:backgroundTint="@color/alphaBlue"
+                        android:text="Upload Image or Take a Picture"
+                        android:textAllCaps="false" />
 
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                android:gravity="center"
-                android:orientation="horizontal">
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
 
                 <Button
-                    android:id="@+id/reserveCancelBtn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="4dp"
-                    android:backgroundTint="@color/alphaGray"
-                    android:drawableLeft="@drawable/cancel_icon_white"
-                    android:text="@string/cancel"
-                    android:textAllCaps="false"/>
+                        android:id="@+id/reserveCancelBtn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="4dp"
+                        android:backgroundTint="@color/alphaGray"
+                        android:drawableLeft="@drawable/cancel_icon_white"
+                        android:text="@string/cancel"
+                        android:textAllCaps="false" />
 
                 <Button
-                    android:id="@+id/reserveDoneBtn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="4dp"
-                    android:backgroundTint="@color/alphaBlue"
-                    android:drawableLeft="@drawable/check_icon"
-                    android:text="@string/reserveBtn"
-                    android:textAllCaps="false"/>
+                        android:id="@+id/reserveDoneBtn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:backgroundTint="@color/alphaBlue"
+                        android:drawableLeft="@drawable/check_icon"
+                        android:text="@string/reserveBtn"
+                        android:textAllCaps="false" />
 
 
             </LinearLayout>

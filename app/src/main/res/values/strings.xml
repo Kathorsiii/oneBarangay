@@ -108,10 +108,6 @@
     <string name="takePic">Take a Picture</string>
     <string name="submit">Submit</string>
 
-    <string name="minute_format">%02d:%02d</string>
-    <string name="date_format">%1$d/%2$d/%3$d</string>
-    <string name="datetime_format">%1$d/%2$d/%3$d %02:%02d</string>
-
     <!--    For Bulk Schedule-->
     <string name="eventText">Select Event</string>
     <string name="noResidents">Enter number</string>
@@ -155,6 +151,12 @@
     <string name="second_fragment_label">Second Fragment</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
+
+    <!--  For Reserve Appointment  -->
+    <string name="minute_format">%02d:%02d</string>
+
+    <string name="date_format">%1$d/%2$d/%3$d</string>
+    <string name="datetime_format">%1$d/%2$d/%3$d %02d:%02d</string>
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
