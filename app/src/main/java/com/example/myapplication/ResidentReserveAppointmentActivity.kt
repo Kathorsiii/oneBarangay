@@ -1,6 +1,7 @@
 package com.example.myapplication
 
 import android.app.DatePickerDialog
+import android.app.ProgressDialog
 import android.app.TimePickerDialog
 import android.content.Intent
 import android.icu.util.Calendar
@@ -17,6 +18,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.myapplication.databinding.ActivityResidentReserveAppointmentBinding
 import com.github.dhaval2404.imagepicker.ImagePicker
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.SetOptions
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
@@ -32,6 +34,9 @@ class ResidentReserveAppointmentActivity : AppCompatActivity() {
 
     // FirebaseAuth
     private lateinit var firebaseAuth: FirebaseAuth
+
+    // ProgressDialog
+    private lateinit var progressDialog: ProgressDialog
 
     private val requestedDocuments: MutableList<Map<String, Any>> = ArrayList()
     private val documentNames: MutableList<String> = ArrayList()
@@ -65,6 +70,98 @@ class ResidentReserveAppointmentActivity : AppCompatActivity() {
 
         // Init FirebaseAuth
         firebaseAuth = FirebaseAuth.getInstance()
+
+        binding.reserveDoneBtn.setOnClickListener {
+            for (documentName in documentNames) {
+                requestedDocuments.add(
+                    mapOf(
+                        "document_name" to documentName,
+                        "ready_issue" to false,
+                        "slugify" to documentName.toSlug()
+                    )
+                )
+            }
+
+            val appointmentPurpose = binding.appointmentPurposeInput.text.toString()
+
+            // Datetime
+            val calendar = Calendar.getInstance()
+            calendar.set(
+                appointmentYear,
+                appointmentMonth,
+                appointmentDay,
+                appointmentHour,
+                appointmentMinute
+            )
+            val startAppointment = calendar.time
+            val timeInSecs: Long = calendar.timeInMillis
+            // Add 15 minutes to startAppointment.
+            val endAppointment = Date(timeInSecs + (15 * 60 * 1000))
+            val currentTime = Calendar.getInstance().time
+
+            val userID = firebaseAuth.uid!!
+            val db = Firebase.firestore
+
+            val userRef = db.collection("users").document(userID)
+            var userData: Map<String, Any>
+
+            userRef.get()
+                .addOnSuccessListener { document ->
+                    if (document != null) {
+                        userData = document.data!!
+
+                        val docRequestRef = db.collection("document_request").document()
+                        val docRequestData = hashMapOf(
+                            "appointment_image" to downloadUri.toString(),
+                            "appointment_purpose" to appointmentPurpose,
+                            "created_on" to currentTime,
+                            "document" to requestedDocuments,
+                            "first_name" to userData["first_name"],
+                            "middle_name" to userData["middle_name"],
+                            "last_name" to userData["last_name"],
+                            "contact_number" to userData["contact_number"],
+                            "address" to userData["address"],
+                            "role" to userData["role"],
+                            "email" to userData["email"],
+                            "photo_url" to userData["photo_url"],
+                            "start_appointment" to startAppointment,
+                            "end_appointment" to endAppointment,
+                            "user_verified" to false,
+                            "status" to "request",
+                            "user_uid" to userID,
+                            "document_id" to docRequestRef.id
+                        )
+
+                        docRequestRef.set(docRequestData, SetOptions.merge())
+                            .addOnSuccessListener {
+                                Toast.makeText(
+                                    this,
+                                    "Appointment was successfully received!",
+                                    Toast.LENGTH_LONG
+                                ).show()
+                                val intent = Intent(this, ViewAppointmentActivity::class.java)
+                                startActivity(intent)
+                            }
+                            .addOnFailureListener { e ->
+                                Toast.makeText(
+                                    this,
+                                    "Appointment Schedule Failed $e",
+                                    Toast.LENGTH_LONG
+                                ).show()
+                            }
+                    } else {
+                        Toast.makeText(this, "No such document", Toast.LENGTH_LONG).show()
+                    }
+                }
+                .addOnFailureListener { exception ->
+                    Toast.makeText(this, "get failed with $exception", Toast.LENGTH_LONG).show()
+                }
+        }
+
+
+        binding.uploadImageOrTakePic.setOnClickListener {
+            openImagePicker()
+        }
 
         binding.residentReserveApptDate.setOnClickListener {
             val calendar = Calendar.getInstance()
@@ -102,98 +199,6 @@ class ResidentReserveAppointmentActivity : AppCompatActivity() {
                 appointmentMinute = minute
             }, startHour, startMinute, false).show()
         }
-
-        binding.reserveDoneBtn.setOnClickListener {
-            for (documentName in documentNames) {
-                requestedDocuments.add(
-                    mapOf(
-                        "document_name" to documentName,
-                        "ready_issue" to false,
-                        "slugify" to documentName.toSlug()
-                    )
-                )
-            }
-
-            val appointmentPurpose = binding.appointmentPurposeInput.text.toString()
-
-            // Datetime
-            val calendar = Calendar.getInstance()
-            calendar.set(
-                appointmentYear,
-                appointmentMonth,
-                appointmentDay,
-                appointmentHour,
-                appointmentMinute
-            )
-            val startAppointment = calendar.time
-            val timeInSecs: Long = calendar.timeInMillis
-            // Add 15 minutes to startAppointment.
-            val endAppointment = Date(timeInSecs + (15 * 60 * 1000))
-            val currentTime = Calendar.getInstance().time
-
-            val userID = firebaseAuth.uid!!
-            val db = Firebase.firestore
-            val userRef = db.collection("users").document(userID)
-            var userData: Map<String, Any> = mapOf()
-
-            userRef.get()
-                .addOnSuccessListener { document ->
-                    if (document != null) {
-                        userData = document.data!!
-                    } else {
-                        Toast.makeText(this, "No such document", Toast.LENGTH_LONG).show()
-                    }
-                }
-                .addOnFailureListener { exception ->
-                    Toast.makeText(this, "get failed with $exception", Toast.LENGTH_LONG).show()
-                }
-
-
-            val docRequestRef = db.collection("document_request").document()
-            val docRequestData = hashMapOf(
-//                "appointment_image" to downloadUri.toString(),
-                "appointment_purpose" to appointmentPurpose,
-                "created_on" to currentTime,
-                "document" to requestedDocuments,
-                "first_name" to userData["first_name"] as String,
-//                "middle_name" to userData["middle_name"],
-//                "last_name" to userData["last_name"],
-//                "contact_number" to userData["contact_number"],
-//                "address" to userData["address"],
-//                "role" to userData["role"],
-//                "email" to userData["email"],
-//                "photo_url" to userData["photo_url"],
-                "start_appointment" to startAppointment,
-                "end_appointment" to endAppointment,
-//                "user_verified" to false,
-                "status" to "request",
-                "user_uid" to userID,
-                "document_id" to docRequestRef.id
-            )
-            println(docRequestData)
-
-//            docRequestRef.set(docRequestData, SetOptions.merge())
-//                .addOnSuccessListener {
-//                    Toast.makeText(
-//                        this,
-//                        "Appointment was successfully received!",
-//                        Toast.LENGTH_LONG
-//                    ).show()
-//                    val intent = Intent(this, ViewAppointmentActivity::class.java)
-//                    startActivity(intent)
-//                }
-//                .addOnFailureListener { e ->
-//                    Toast.makeText(
-//                        this,
-//                        "Appointment Schedule Failed $e",
-//                        Toast.LENGTH_LONG
-//                    ).show()
-//                }
-        }
-
-        binding.uploadImageOrTakePic.setOnClickListener {
-            openImagePicker()
-        }
     }
 
     // Open Image Picker
@@ -218,6 +223,10 @@ class ResidentReserveAppointmentActivity : AppCompatActivity() {
                 val file = fromFile(File(fileUri.path!!))
                 val imagesRef = storageRef.child("${file.lastPathSegment}")
                 val uploadTask = imagesRef.putFile(file)
+                progressDialog.setTitle("Uploading Image...")
+                progressDialog.setMessage("Wait while loading...")
+                progressDialog.setCancelable(false)
+                progressDialog.show()
 
                 uploadTask.addOnFailureListener {
                     Toast.makeText(this, it.message, Toast.LENGTH_LONG).show()
@@ -231,6 +240,7 @@ class ResidentReserveAppointmentActivity : AppCompatActivity() {
                         imagesRef.downloadUrl
                     }.addOnCompleteListener { task ->
                         if (task.isSuccessful) {
+                            progressDialog.dismiss();
                             downloadUri = task.result!!
                             Toast.makeText(this, "Upload Successfully!", Toast.LENGTH_LONG).show()
                             setViewVisibility()
