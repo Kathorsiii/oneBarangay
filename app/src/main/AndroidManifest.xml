@@ -37,16 +37,9 @@
             android:name=".ResidentUploadComplaintProofActivity"
             android:exported="true" />
         <activity
-                android:name=".ResidentUploadComplaintProofActivity"
-                android:exported="true" />
-        <activity
                 android:name=".ResidentReserveAppointmentActivity"
                 android:exported="true" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
                 android:name=".ResidentAppointmentDetailsActivity"
@@ -57,9 +50,6 @@
         <activity
             android:name=".ChangePasswordActivity"
             android:exported="true" />
-        <activity
-                android:name=".ChangePasswordActivity"
-                android:exported="true" />
         <activity
                 android:name=".AddBulkScheduleActivity"
                 android:exported="true" />
@@ -79,7 +69,13 @@
                 android:exported="true" />
         <activity
                 android:name=".ResidentAddComplaintActivity"
-                android:exported="true" />
+                android:exported="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
                 android:name=".MainActivity"
                 android:exported="true" />

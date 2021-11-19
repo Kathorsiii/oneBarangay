@@ -58,6 +58,21 @@
     <string name="docuCedula">Cedula</string>
     <string name="brgyBorrow">Barangay Borrowing</string>
 
+    <string-array name="complaint_list">
+        <item>Public Disturbance</item>
+        <item>Gossip Problem</item>
+        <item>Lending Problem</item>
+        <item>Obstruction</item>
+        <item>Others</item>
+    </string-array>
+
+    <string-array name="complaint_status_list">
+        <item>For Review</item>
+        <item>On Going</item>
+        <item>Handed To Police</item>
+        <item>Resolved</item>
+    </string-array>
+
     <!--  For Sign Up  -->
     <string name="signupBtn">Sign Up</string>
     <string name="alreadyHave">Already have an account? Sign In</string>
@@ -91,6 +106,10 @@
     <string name="imageUpload">Image Upload</string>
     <string name="takePic">Take a Picture</string>
     <string name="submit">Submit</string>
+
+    <string name="minute_format">%02d:%02d</string>
+    <string name="date_format">%1$d/%2$d/%3$d</string>
+    <string name="datetime_format">%1$d/%2$d/%3$d %02:%02d</string>
 
     <!--    For Bulk Schedule-->
     <string name="eventText">Select Event</string>
