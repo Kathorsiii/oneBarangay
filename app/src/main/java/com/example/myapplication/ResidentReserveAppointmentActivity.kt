@@ -137,7 +137,7 @@ class ResidentReserveAppointmentActivity : AppCompatActivity() {
                             "end_appointment" to endAppointment,
                             "user_verified" to false,
                             "status" to "request",
-                            "user_uid" to userID,
+                            "user_id" to userID,
                             "document_id" to docRequestRef.id
                         )
 
