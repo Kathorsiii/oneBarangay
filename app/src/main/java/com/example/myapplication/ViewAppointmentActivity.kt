@@ -79,15 +79,15 @@ class ViewAppointmentActivity : AppCompatActivity() {
             requestedDocuments.add(document["document_name"] as String)
         }
 
-        val startAppointment = appointment.start_appointment
-        val endAppointment = appointment.end_appointment
-        if (startAppointment != null && endAppointment != null) {
-            intent.putExtra("start_appointment", appointment.start_appointment?.toDate().toString())
-            intent.putExtra("end_appointment", appointment.end_appointment?.toDate().toString())
-        } else {
-            intent.putExtra("start_appointment", "Approve The Appointment First!")
-            intent.putExtra("end_appointment", "Approve The Appointment First!")
-        }
+//        val startAppointment = appointment.start_appointment?.toDate().toString()
+//        val endAppointment = appointment.end_appointment?.toDate().toString()
+//        if (startAppointment != null && endAppointment != null) {
+//            intent.putExtra("start_appointment", startAppointment)
+//            intent.putExtra("end_appointment", endAppointment)
+//        } else {
+//            intent.putExtra("start_appointment", "Approve The Appointment First!")
+//            intent.putExtra("end_appointment", "Approve The Appointment First!")
+//        }
 
         val intent = Intent(this, AppointmentDisplayActivity::class.java)
         intent.putExtra("first_name", appointment.first_name)
@@ -98,6 +98,11 @@ class ViewAppointmentActivity : AppCompatActivity() {
         intent.putExtra("email", appointment.email)
         intent.putExtra("status", appointment.status)
         intent.putExtra("documents", requestedDocuments.joinToString(",\n"))
+
+        // Working
+        intent.putExtra("start_appointment", appointment.start_appointment?.toDate().toString())
+        intent.putExtra("end_appointment", appointment.end_appointment?.toDate().toString())
+
         startActivity(intent)
     }
 }

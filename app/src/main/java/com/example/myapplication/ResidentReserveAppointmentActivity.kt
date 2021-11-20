@@ -157,7 +157,7 @@ class ResidentReserveAppointmentActivity : AppCompatActivity() {
                                     dialog.dismiss()
                                     dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
 
-                                    val intent = Intent(this, ViewComplaintActivity::class.java)
+                                    val intent = Intent(this, ViewAppointmentActivity::class.java)
                                     startActivity(intent)
                                 }
                             }

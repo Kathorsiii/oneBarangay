@@ -51,6 +51,7 @@
                     android:layout_height="wrap_content"
                     android:text="Name"
                     android:textColor="@android:color/black"
+                    android:textSize="16sp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -58,7 +59,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Name"
-                    android:textColor="@android:color/black" />
+                    android:textColor="@android:color/black"
+                    android:textSize="16sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -70,18 +72,18 @@
                 android:orientation="vertical">
 
                 <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Document Status"
-                        android:textColor="@android:color/black"
-                        android:textStyle="bold" />
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Document Status"
+                    android:textColor="@android:color/black"
+                    android:textStyle="bold" />
 
                 <TextView
-                        android:id="@+id/appointmentDocumentStatus"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Document Status"
-                        android:textColor="@android:color/black" />
+                    android:id="@+id/appointmentDocumentStatus"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Document Status"
+                    android:textColor="@android:color/black" />
             </LinearLayout>
 
             <LinearLayout
@@ -97,6 +99,7 @@
                     android:layout_height="wrap_content"
                     android:text="Start Appointment"
                     android:textColor="@android:color/black"
+                    android:textSize="16sp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -104,7 +107,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Start Appointment"
-                    android:textColor="@android:color/black" />
+                    android:textColor="@android:color/black"
+                    android:textSize="16sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -120,6 +124,7 @@
                     android:layout_height="wrap_content"
                     android:text="End Appointment"
                     android:textColor="@android:color/black"
+                    android:textSize="16sp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -127,7 +132,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="End Appointment"
-                    android:textColor="@android:color/black" />
+                    android:textColor="@android:color/black"
+                    android:textSize="16sp" />
             </LinearLayout>
 
             <Button
@@ -152,6 +158,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/docuType"
                     android:textColor="@android:color/black"
+                    android:textSize="16sp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -159,7 +166,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Document Type"
-                    android:textColor="@android:color/black" />
+                    android:textColor="@android:color/black"
+                    android:textSize="16sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -175,6 +183,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/purpose"
                     android:textColor="@android:color/black"
+                    android:textSize="16sp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -182,7 +191,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Document Purpose"
-                    android:textColor="@android:color/black" />
+                    android:textColor="@android:color/black"
+                    android:textSize="16sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -197,25 +207,22 @@
                     android:id="@+id/verificationSection"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
                     android:text="@string/verification"
-                    android:textColor="@android:color/black" />
+                    android:textColor="@android:color/black"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
 
-                <LinearLayout
+                <ImageView
+                    android:id="@+id/appointmentImage"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal">
-
-                    <com.google.android.material.imageview.ShapeableImageView
-                        android:id="@+id/appointmentImage"
-                        android:layout_width="match_parent"
-                        android:layout_height="100dp"
-                        android:layout_gravity="center"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginEnd="16dp"
-                        android:src="@mipmap/ic_launcher"
-                        app:shapeAppearanceOverlay="@style/roundedSquare" />
-
-                </LinearLayout>
+                    android:layout_height="200dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/white_filled_cornered_edge"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/dice" />
 
             </LinearLayout>
 

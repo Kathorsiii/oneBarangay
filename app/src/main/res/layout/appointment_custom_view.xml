@@ -1,92 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
-    <androidx.cardview.widget.CardView
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?android:attr/selectableItemBackground"
+    android:orientation="vertical"
+    app:cardCornerRadius="@dimen/dimen_20dp"
+    app:cardElevation="5dp"
+    app:cardUseCompatPadding="true"
+    app:contentPadding="10dp">
+
+    <RelativeLayout
+        android:id="@+id/rl_appointment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:foreground="?android:attr/selectableItemBackground"
-        android:clickable="true"
-        android:focusable="true"
-        app:cardCornerRadius="@dimen/dimen_20dp"
-        app:cardUseCompatPadding="true"
-        app:cardElevation="5dp"
-        app:contentPadding="10dp">
+        android:padding="16dp">
 
-        <RelativeLayout
-            android:id="@+id/rl_appointment"
-            android:layout_width="match_parent"
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/appointment_img"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@mipmap/ic_launcher"
+            app:shapeAppearanceOverlay="@style/roundedSquare" />
+
+        <TextView
+            android:id="@+id/appointment_fullName"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="16dp"
-            android:orientation="vertical">
+            android:layout_marginStart="20dp"
+            android:layout_toEndOf="@+id/appointment_img"
+            android:text="Full Name"
+            android:textColor="@android:color/black"
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
-            <com.google.android.material.imageview.ShapeableImageView
-                    android:id="@+id/appointment_img"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:src="@mipmap/ic_launcher"
-                    app:shapeAppearanceOverlay="@style/roundedSquare" />
+        <TextView
+            android:id="@+id/user_email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/appointment_fullName"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="5dp"
+            android:layout_toEndOf="@+id/appointment_img"
+            android:text="Email"
+            android:textColor="@android:color/black"
+            android:textSize="14sp" />
 
-            <TextView
-                android:id="@+id/appointment_fullName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_toEndOf="@+id/appointment_img"
-                android:text="Full Name"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:textColor="@android:color/black"/>
+        <TextView
+            android:id="@+id/contact_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/user_email"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="5dp"
+            android:layout_toEndOf="@+id/appointment_img"
+            android:text="Contact Number"
+            android:textColor="@android:color/black"
+            android:textSize="14sp" />
 
-            <TextView
-                    android:id="@+id/user_email"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/appointment_fullName"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="11dp"
-                    android:layout_toEndOf="@+id/appointment_img"
-                    android:text="Email"
-                    android:textColor="@android:color/black"
-                    android:textSize="14sp" />
+        <TextView
+            android:id="@+id/requestDocuments"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/contact_number"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="5dp"
+            android:layout_toEndOf="@+id/appointment_img"
+            android:text="Document Name"
+            android:textColor="@android:color/black"
+            android:textSize="14sp" />
 
-            <TextView
-                    android:id="@+id/status"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Document Status"
-                    android:textColor="@android:color/black"
-                    android:textSize="14sp"
-                    android:layout_marginTop="11dp"
-                    android:layout_below="@+id/requestDocuments"
-                    android:layout_toEndOf="@+id/appointment_img"
-                    android:layout_marginStart="20dp" />
+        <TextView
+            android:id="@+id/status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/requestDocuments"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="5dp"
+            android:layout_toEndOf="@+id/appointment_img"
+            android:text="Document Status"
+            android:textColor="@android:color/black"
+            android:textSize="14sp" />
 
-            <TextView
-                    android:id="@+id/contact_number"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Contact Number"
-                    android:textColor="@android:color/black"
-                    android:textSize="14sp"
-                    android:layout_marginTop="11dp"
-                    android:layout_below="@+id/user_email"
-                    android:layout_toEndOf="@+id/appointment_img"
-                    android:layout_marginStart="20dp" />
-
-            <TextView
-                    android:id="@+id/requestDocuments"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="11dp"
-                    android:text="Document Name"
-                    android:textColor="@android:color/black"
-                    android:textSize="14sp"
-                    android:layout_below="@+id/contact_number"
-                    android:layout_toEndOf="@+id/appointment_img" />
-
-        </RelativeLayout>
+    </RelativeLayout>
 
 </androidx.cardview.widget.CardView>
