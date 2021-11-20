@@ -43,280 +43,302 @@ class OcrAdapter(
                 itemView.family_member.text = "Family Member $position"
             }
 
-            itemView.first_name.setText(family.first_name.text)
-            itemView.material_firstName.helperText =
-                "Confidence Level: ${family.first_name.confidence}"
-            itemView.first_name.addTextChangedListener(object : TextWatcher {
-                override fun afterTextChanged(s: Editable?) {
-                    family.first_name.text = s.toString()
-                }
+            family.first_name?.let {
+                itemView.first_name.setText(it.text)
+                itemView.material_firstName.helperText =
+                    "Confidence Level: ${it.confidence}"
+                itemView.first_name.addTextChangedListener(object : TextWatcher {
+                    override fun afterTextChanged(s: Editable?) {
+                        it.text = s.toString()
+                    }
 
-                override fun beforeTextChanged(
-                    s: CharSequence?,
-                    start: Int,
-                    count: Int,
-                    after: Int,
-                ) {
-                }
+                    override fun beforeTextChanged(
+                        s: CharSequence?,
+                        start: Int,
+                        count: Int,
+                        after: Int,
+                    ) {
+                    }
 
-                override fun onTextChanged(
-                    s: CharSequence?,
-                    start: Int,
-                    before: Int,
-                    count: Int,
-                ) {
-                }
-            })
+                    override fun onTextChanged(
+                        s: CharSequence?,
+                        start: Int,
+                        before: Int,
+                        count: Int,
+                    ) {
+                    }
+                })
+            }
 
-            itemView.middle_name.setText(family.middle_name.text)
-            itemView.material_middleName.helperText =
-                "Confidence Level: ${family.middle_name.confidence}"
-            itemView.middle_name.addTextChangedListener(object : TextWatcher {
-                override fun afterTextChanged(s: Editable?) {
-                    family.middle_name.text = s.toString()
-                }
+            family.middle_name?.let {
+                itemView.middle_name.setText(it.text)
+                itemView.material_middleName.helperText =
+                    "Confidence Level: ${it.confidence}"
+                itemView.middle_name.addTextChangedListener(object : TextWatcher {
+                    override fun afterTextChanged(s: Editable?) {
+                        it.text = s.toString()
+                    }
 
-                override fun beforeTextChanged(
-                    s: CharSequence?,
-                    start: Int,
-                    count: Int,
-                    after: Int,
-                ) {
-                }
+                    override fun beforeTextChanged(
+                        s: CharSequence?,
+                        start: Int,
+                        count: Int,
+                        after: Int,
+                    ) {
+                    }
 
-                override fun onTextChanged(
-                    s: CharSequence?,
-                    start: Int,
-                    before: Int,
-                    count: Int,
-                ) {
-                }
-            })
+                    override fun onTextChanged(
+                        s: CharSequence?,
+                        start: Int,
+                        before: Int,
+                        count: Int,
+                    ) {
+                    }
+                })
+            }
 
-            itemView.last_name.setText(family.last_name.text)
-            itemView.material_lastName.helperText =
-                "Confidence Level: ${family.last_name.confidence}"
-            itemView.last_name.addTextChangedListener(object : TextWatcher {
-                override fun afterTextChanged(s: Editable?) {
-                    family.last_name.text = s.toString()
-                }
+            family.last_name?.let {
+                itemView.last_name.setText(it.text)
+                itemView.material_lastName.helperText =
+                    "Confidence Level: ${it.confidence}"
+                itemView.last_name.addTextChangedListener(object : TextWatcher {
+                    override fun afterTextChanged(s: Editable?) {
+                        it.text = s.toString()
+                    }
 
-                override fun beforeTextChanged(
-                    s: CharSequence?,
-                    start: Int,
-                    count: Int,
-                    after: Int,
-                ) {
-                }
+                    override fun beforeTextChanged(
+                        s: CharSequence?,
+                        start: Int,
+                        count: Int,
+                        after: Int,
+                    ) {
+                    }
 
-                override fun onTextChanged(
-                    s: CharSequence?,
-                    start: Int,
-                    before: Int,
-                    count: Int,
-                ) {
-                }
-            })
+                    override fun onTextChanged(
+                        s: CharSequence?,
+                        start: Int,
+                        before: Int,
+                        count: Int,
+                    ) {
+                    }
+                })
+            }
 
-            itemView.ext.setText(family.ext.text)
-            itemView.material_extension.helperText =
-                "Confidence Level: ${family.ext.confidence}"
-            itemView.ext.addTextChangedListener(object : TextWatcher {
-                override fun afterTextChanged(s: Editable?) {
-                    family.ext.text = s.toString()
-                }
+            family.ext?.let {
+                itemView.ext.setText(it.text)
+                itemView.material_extension.helperText =
+                    "Confidence Level: ${it.confidence}"
+                itemView.ext.addTextChangedListener(object : TextWatcher {
+                    override fun afterTextChanged(s: Editable?) {
+                        it.text = s.toString()
+                    }
 
-                override fun beforeTextChanged(
-                    s: CharSequence?,
-                    start: Int,
-                    count: Int,
-                    after: Int,
-                ) {
-                }
+                    override fun beforeTextChanged(
+                        s: CharSequence?,
+                        start: Int,
+                        count: Int,
+                        after: Int,
+                    ) {
+                    }
 
-                override fun onTextChanged(
-                    s: CharSequence?,
-                    start: Int,
-                    before: Int,
-                    count: Int,
-                ) {
-                }
-            })
+                    override fun onTextChanged(
+                        s: CharSequence?,
+                        start: Int,
+                        before: Int,
+                        count: Int,
+                    ) {
+                    }
+                })
+            }
 
-            itemView.birth_place.setText(family.birth_place.text)
-            itemView.material_birthPlace.helperText =
-                "Confidence Level: ${family.birth_place.confidence}"
-            itemView.birth_place.addTextChangedListener(object : TextWatcher {
-                override fun afterTextChanged(s: Editable?) {
-                    family.birth_place.text = s.toString()
-                }
+            family.birth_place?.let {
+                itemView.birth_place.setText(it.text)
+                itemView.material_birthPlace.helperText =
+                    "Confidence Level: ${it.confidence}"
+                itemView.birth_place.addTextChangedListener(object : TextWatcher {
+                    override fun afterTextChanged(s: Editable?) {
+                        it.text = s.toString()
+                    }
 
-                override fun beforeTextChanged(
-                    s: CharSequence?,
-                    start: Int,
-                    count: Int,
-                    after: Int,
-                ) {
-                }
+                    override fun beforeTextChanged(
+                        s: CharSequence?,
+                        start: Int,
+                        count: Int,
+                        after: Int,
+                    ) {
+                    }
 
-                override fun onTextChanged(
-                    s: CharSequence?,
-                    start: Int,
-                    before: Int,
-                    count: Int,
-                ) {
-                }
-            })
+                    override fun onTextChanged(
+                        s: CharSequence?,
+                        start: Int,
+                        before: Int,
+                        count: Int,
+                    ) {
+                    }
+                })
+            }
 
-            itemView.birth_date.setText(family.date_of_birth.text)
-            itemView.material_birthDate.helperText =
-                "Confidence Level: ${family.date_of_birth.confidence}"
-            itemView.birth_date.addTextChangedListener(object : TextWatcher {
-                override fun afterTextChanged(s: Editable?) {
-                    family.date_of_birth.text = s.toString()
-                }
+            family.date_of_birth?.let {
+                itemView.birth_date.setText(it.text)
+                itemView.material_birthDate.helperText =
+                    "Confidence Level: ${it.confidence}"
+                itemView.birth_date.addTextChangedListener(object : TextWatcher {
+                    override fun afterTextChanged(s: Editable?) {
+                        it.text = s.toString()
+                    }
 
-                override fun beforeTextChanged(
-                    s: CharSequence?,
-                    start: Int,
-                    count: Int,
-                    after: Int,
-                ) {
-                }
+                    override fun beforeTextChanged(
+                        s: CharSequence?,
+                        start: Int,
+                        count: Int,
+                        after: Int,
+                    ) {
+                    }
 
-                override fun onTextChanged(
-                    s: CharSequence?,
-                    start: Int,
-                    before: Int,
-                    count: Int,
-                ) {
-                }
-            })
+                    override fun onTextChanged(
+                        s: CharSequence?,
+                        start: Int,
+                        before: Int,
+                        count: Int,
+                    ) {
+                    }
+                })
+            }
 
-            itemView.gender.setText(family.sex.text)
-            itemView.material_gender.helperText =
-                "Confidence Level: ${family.sex.confidence}"
-            itemView.gender.addTextChangedListener(object : TextWatcher {
-                override fun afterTextChanged(s: Editable?) {
-                    family.sex.text = s.toString()
-                }
+            family.sex?.let {
+                itemView.gender.setText(it.text)
+                itemView.material_gender.helperText =
+                    "Confidence Level: ${it.confidence}"
+                itemView.gender.addTextChangedListener(object : TextWatcher {
+                    override fun afterTextChanged(s: Editable?) {
+                        it.text = s.toString()
+                    }
 
-                override fun beforeTextChanged(
-                    s: CharSequence?,
-                    start: Int,
-                    count: Int,
-                    after: Int,
-                ) {
-                }
+                    override fun beforeTextChanged(
+                        s: CharSequence?,
+                        start: Int,
+                        count: Int,
+                        after: Int,
+                    ) {
+                    }
 
-                override fun onTextChanged(
-                    s: CharSequence?,
-                    start: Int,
-                    before: Int,
-                    count: Int,
-                ) {
-                }
-            })
+                    override fun onTextChanged(
+                        s: CharSequence?,
+                        start: Int,
+                        before: Int,
+                        count: Int,
+                    ) {
+                    }
+                })
+            }
 
-            itemView.civil_status.setText(family.civil_status.text)
-            itemView.material_civilStatus.helperText =
-                "Confidence Level: ${family.civil_status.confidence}"
-            itemView.civil_status.addTextChangedListener(object : TextWatcher {
-                override fun afterTextChanged(s: Editable?) {
-                    family.civil_status.text = s.toString()
-                }
+            family.civil_status?.let {
+                itemView.civil_status.setText(it.text)
+                itemView.material_civilStatus.helperText =
+                    "Confidence Level: ${it.confidence}"
+                itemView.civil_status.addTextChangedListener(object : TextWatcher {
+                    override fun afterTextChanged(s: Editable?) {
+                        it.text = s.toString()
+                    }
 
-                override fun beforeTextChanged(
-                    s: CharSequence?,
-                    start: Int,
-                    count: Int,
-                    after: Int,
-                ) {
-                }
+                    override fun beforeTextChanged(
+                        s: CharSequence?,
+                        start: Int,
+                        count: Int,
+                        after: Int,
+                    ) {
+                    }
 
-                override fun onTextChanged(
-                    s: CharSequence?,
-                    start: Int,
-                    before: Int,
-                    count: Int,
-                ) {
-                }
-            })
+                    override fun onTextChanged(
+                        s: CharSequence?,
+                        start: Int,
+                        before: Int,
+                        count: Int,
+                    ) {
+                    }
+                })
+            }
 
-            itemView.citizenship.setText(family.citizenship.text)
-            itemView.material_citizenship.helperText =
-                "Confidence Level: ${family.citizenship.confidence}"
-            itemView.citizenship.addTextChangedListener(object : TextWatcher {
-                override fun afterTextChanged(s: Editable?) {
-                    family.citizenship.text = s.toString()
-                }
+            family.citizenship?.let {
+                itemView.citizenship.setText(it.text)
+                itemView.material_citizenship.helperText =
+                    "Confidence Level: ${it.confidence}"
+                itemView.citizenship.addTextChangedListener(object : TextWatcher {
+                    override fun afterTextChanged(s: Editable?) {
+                        it.text = s.toString()
+                    }
 
-                override fun beforeTextChanged(
-                    s: CharSequence?,
-                    start: Int,
-                    count: Int,
-                    after: Int,
-                ) {
-                }
+                    override fun beforeTextChanged(
+                        s: CharSequence?,
+                        start: Int,
+                        count: Int,
+                        after: Int,
+                    ) {
+                    }
 
-                override fun onTextChanged(
-                    s: CharSequence?,
-                    start: Int,
-                    before: Int,
-                    count: Int,
-                ) {
-                }
-            })
+                    override fun onTextChanged(
+                        s: CharSequence?,
+                        start: Int,
+                        before: Int,
+                        count: Int,
+                    ) {
+                    }
+                })
+            }
 
-            itemView.monthly_income.setText(family.monthly_income.text)
-            itemView.material_monthlyIncome.helperText =
-                "Confidence Level: ${family.monthly_income.confidence}"
-            itemView.monthly_income.addTextChangedListener(object : TextWatcher {
-                override fun afterTextChanged(s: Editable?) {
-                    family.monthly_income.text = s.toString()
-                }
+            family.monthly_income?.let {
+                itemView.monthly_income.setText(it.text)
+                itemView.material_monthlyIncome.helperText =
+                    "Confidence Level: ${it.confidence}"
+                itemView.monthly_income.addTextChangedListener(object : TextWatcher {
+                    override fun afterTextChanged(s: Editable?) {
+                        it.text = s.toString()
+                    }
 
-                override fun beforeTextChanged(
-                    s: CharSequence?,
-                    start: Int,
-                    count: Int,
-                    after: Int,
-                ) {
-                }
+                    override fun beforeTextChanged(
+                        s: CharSequence?,
+                        start: Int,
+                        count: Int,
+                        after: Int,
+                    ) {
+                    }
 
-                override fun onTextChanged(
-                    s: CharSequence?,
-                    start: Int,
-                    before: Int,
-                    count: Int,
-                ) {
-                }
-            })
+                    override fun onTextChanged(
+                        s: CharSequence?,
+                        start: Int,
+                        before: Int,
+                        count: Int,
+                    ) {
+                    }
+                })
+            }
 
-            itemView.remarks.setText(family.remarks.text)
-            itemView.material_remarks.helperText =
-                "Confidence Level: ${family.remarks.confidence}"
-            itemView.remarks.addTextChangedListener(object : TextWatcher {
-                override fun afterTextChanged(s: Editable?) {
-                    family.remarks.text = s.toString()
-                }
+            family.remarks?.let {
+                itemView.remarks.setText(it.text)
+                itemView.material_remarks.helperText =
+                    "Confidence Level: ${it.confidence}"
+                itemView.remarks.addTextChangedListener(object : TextWatcher {
+                    override fun afterTextChanged(s: Editable?) {
+                        it.text = s.toString()
+                    }
 
-                override fun beforeTextChanged(
-                    s: CharSequence?,
-                    start: Int,
-                    count: Int,
-                    after: Int,
-                ) {
-                }
+                    override fun beforeTextChanged(
+                        s: CharSequence?,
+                        start: Int,
+                        count: Int,
+                        after: Int,
+                    ) {
+                    }
 
-                override fun onTextChanged(
-                    s: CharSequence?,
-                    start: Int,
-                    before: Int,
-                    count: Int,
-                ) {
-                }
-            })
+                    override fun onTextChanged(
+                        s: CharSequence?,
+                        start: Int,
+                        before: Int,
+                        count: Int,
+                    ) {
+                    }
+                })
+            }
 
             itemView.setOnClickListener {
                 clickListener(family)

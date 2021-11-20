@@ -99,7 +99,7 @@ class OcrResultActivity : AppCompatActivity() {
     private fun listItemClicked(family: FamilyItem) {
         Toast.makeText(
             this,
-            family.first_name.text,
+            family.first_name?.text,
             Toast.LENGTH_LONG
         ).show()
     }
