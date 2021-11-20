@@ -1,5 +1,6 @@
 package com.example.myapplication
 
+import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.app.ProgressDialog
 import android.app.TimePickerDialog
@@ -23,6 +24,8 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.ktx.storage
+import kotlinx.android.synthetic.main.sucess_dialog_reserve_appointment.*
+import kotlinx.android.synthetic.main.sucess_dialog_reserve_appointment.view.*
 import java.io.File
 import java.util.*
 import kotlin.collections.ArrayList
@@ -42,7 +45,7 @@ class ResidentReserveAppointmentActivity : AppCompatActivity() {
     private val documentNames: MutableList<String> = ArrayList()
 
     private var storage: FirebaseStorage = Firebase.storage("gs://onebarangay-media")
-    private lateinit var downloadUri: Uri
+    private var downloadUri: Uri = Uri.parse("")
 
     // For Checkbox
     private var appointmentYear: Int = 0
@@ -67,6 +70,12 @@ class ResidentReserveAppointmentActivity : AppCompatActivity() {
 
         // Back button
         actionBar.setDisplayHomeAsUpEnabled(true)
+
+        // Progress Dialog
+        progressDialog = ProgressDialog(this)
+        progressDialog.setTitle("Uploading Image...")
+        progressDialog.setMessage("Wait while loading...")
+        progressDialog.setCancelable(false)
 
         // Init FirebaseAuth
         firebaseAuth = FirebaseAuth.getInstance()
@@ -134,13 +143,23 @@ class ResidentReserveAppointmentActivity : AppCompatActivity() {
 
                         docRequestRef.set(docRequestData, SetOptions.merge())
                             .addOnSuccessListener {
-                                Toast.makeText(
-                                    this,
-                                    "Appointment was successfully received!",
-                                    Toast.LENGTH_LONG
-                                ).show()
-                                val intent = Intent(this, ViewAppointmentActivity::class.java)
-                                startActivity(intent)
+
+                                val view = View.inflate(this@ResidentReserveAppointmentActivity,
+                                    R.layout.sucess_dialog_reserve_appointment,
+                                    null)
+                                val builder =
+                                    AlertDialog.Builder(this@ResidentReserveAppointmentActivity)
+                                builder.setView(view)
+                                val dialog = builder.create()
+                                dialog.show()
+
+                                view.reserveAppt_ok_btn.setOnClickListener {
+                                    dialog.dismiss()
+                                    dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
+
+                                    val intent = Intent(this, ViewComplaintActivity::class.java)
+                                    startActivity(intent)
+                                }
                             }
                             .addOnFailureListener { e ->
                                 Toast.makeText(
@@ -158,6 +177,10 @@ class ResidentReserveAppointmentActivity : AppCompatActivity() {
                 }
         }
 
+        binding.reserveCancelBtn.setOnClickListener {
+            val intent = Intent(this, ViewAppointmentActivity::class.java)
+            startActivity(intent)
+        }
 
         binding.uploadImageOrTakePic.setOnClickListener {
             openImagePicker()
@@ -223,9 +246,7 @@ class ResidentReserveAppointmentActivity : AppCompatActivity() {
                 val file = fromFile(File(fileUri.path!!))
                 val imagesRef = storageRef.child("${file.lastPathSegment}")
                 val uploadTask = imagesRef.putFile(file)
-                progressDialog.setTitle("Uploading Image...")
-                progressDialog.setMessage("Wait while loading...")
-                progressDialog.setCancelable(false)
+
                 progressDialog.show()
 
                 uploadTask.addOnFailureListener {
