@@ -1,0 +1,6 @@
+package com.example.myapplication.data.model.ocr
+
+data class LastNameApelyido(
+    val confidence: Double,
+    var text: String
+)
