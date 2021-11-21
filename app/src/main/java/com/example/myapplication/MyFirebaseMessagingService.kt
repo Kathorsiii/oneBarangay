@@ -4,9 +4,11 @@ import android.annotation.SuppressLint
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
+import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.Intent
 import android.os.Build
+import android.util.Log
 import android.widget.RemoteViews
 import androidx.core.app.NotificationCompat
 import com.google.firebase.messaging.FirebaseMessagingService
@@ -64,5 +66,19 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         notificationManager.notify(0, builder.build())
 
     }
+
+//    override fun onNewToken(token: String) {
+//        Log.d(TAG, "Refreshed token: $token")
+//
+//        // If you want to send messages to this application instance or
+//        // manage this apps subscriptions on the server side, send the
+//        // FCM registration token to your app server.
+//        sendRegistrationToServer(token)
+//    }
+//
+//    private fun sendRegistrationToServer(token: String?) {
+//        // TODO: Implement this method to send token to your app server.
+//        Log.d(TAG, "sendRegistrationTokenToServer($token)")
+//    }
 
 }

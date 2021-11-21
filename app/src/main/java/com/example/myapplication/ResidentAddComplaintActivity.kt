@@ -1,12 +1,8 @@
 package com.example.myapplication
 
-import android.app.AlertDialog
-import android.app.DatePickerDialog
-import android.app.ProgressDialog
-import android.app.TimePickerDialog
+import android.app.*
 import android.content.ContentValues.TAG
 import android.content.Intent
-import android.gesture.GestureLibraries.fromFile
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -21,19 +17,29 @@ import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import com.example.myapplication.databinding.ActivityResidentAddComplaintBinding
 import com.github.dhaval2404.imagepicker.ImagePicker
+import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.SetOptions
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.messaging.Constants.MessagePayloadKeys.SENDER_ID
+import com.google.firebase.messaging.FirebaseMessaging
+import com.google.firebase.messaging.RemoteMessage
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.ktx.storage
+import com.squareup.okhttp.*
 import kotlinx.android.synthetic.main.activity_resident_add_complaint.*
+import kotlinx.android.synthetic.main.notification.*
 import kotlinx.android.synthetic.main.success_dialog_add_complaint.view.*
+import org.json.JSONArray
 import java.io.File
 import java.util.*
+import java.util.concurrent.atomic.AtomicInteger
 
 
 class ResidentAddComplaintActivity : AppCompatActivity() {
+
+
 
     // Binding
     private lateinit var binding: ActivityResidentAddComplaintBinding
@@ -46,6 +52,8 @@ class ResidentAddComplaintActivity : AppCompatActivity() {
 
     // ProgressDialog
     private lateinit var progressDialog: ProgressDialog
+
+//    private lateinit var generatedToken: String
 
     private var complaintYear: Int = 0
     private var complaintMonth: Int = 0
@@ -228,12 +236,134 @@ class ResidentAddComplaintActivity : AppCompatActivity() {
                         val intent = Intent(this, ViewComplaintActivity::class.java)
                         startActivity(intent)
                     }
+
+                    sendNotification()
+
                 }
 
                 .addOnFailureListener { e ->
                     Log.w(TAG, "Error writing document", e)
                 }
         }
+    }
+
+    var mClient: OkHttpClient = OkHttpClient()
+    var refreshedToken = ""
+
+    var jsonArray: JSONArray = JSONArray()
+    //    jsonArray.put(refreshedToken)
+
+//    fun sendMessage(
+//        recipients: JSONArray?,
+//        title: String?,
+//        body: String?,
+//        icon: String?,
+//        message: String?,
+//    ) {
+//        @SuppressLint("StaticFieldLeak")
+//        object : AsyncTask<String?, String?, String?>() {
+//            @JvmName("doInBackground1")
+//            protected fun doInBackground(vararg params: String): String? {
+//                try {
+//                    val root = JSONObject()
+//                    val notification = JSONObject()
+//                    notification.put("body", body)
+//                    notification.put("title", title)
+//                    notification.put("icon", icon)
+//                    val data = JSONObject()
+//                    data.put("message", message)
+//                    root.put("notification", notification)
+//                    root.put("data", data)
+//                    root.put("registration_ids", recipients)
+//                    val result = postToFCM(root.toString())
+//                    Log.d("Main Activity", "Result: $result")
+//                    return result
+//                } catch (ex: Exception) {
+//                    ex.printStackTrace()
+//                }
+//                return null
+//            }
+//
+//            override fun onPostExecute(result: String?) {
+//                try {
+//                    val resultJson = JSONObject(result)
+//                    val success: Int
+//                    val failure: Int
+//                    success = resultJson.getInt("success")
+//                    failure = resultJson.getInt("failure")
+//                    Toast.makeText(this@ResidentAddComplaintActivity,
+//                        "Message Success: " + success + "Message Failed: " + failure,
+//                        Toast.LENGTH_LONG).show()
+//                } catch (e: JSONException) {
+//                    e.printStackTrace()
+//                    Toast.makeText(this@ResidentAddComplaintActivity,
+//                        "Message Failed, Unknown error occurred.",
+//                        Toast.LENGTH_LONG).show()
+//                }
+//            }
+//
+//            override fun doInBackground(vararg p0: String?): String? {
+//                TODO("Not yet implemented")
+//            }
+//        }.execute()
+//    }
+//
+//    @RequiresApi(Build.VERSION_CODES.N)
+//    @Throws(IOException::class)
+//    fun postToFCM(bodyString: String?): String {
+//        val FCM_MESSAGE_URL = "https://fcm.googleapis.com/fcm/send"
+//        val JSON = MediaType.parse("application/json; charset=utf-8")
+//        val body = RequestBody.create(JSON, bodyString)
+//        val request: Request = GestureDescription.Builder()
+//            .url(Url.FCM_MESSAGE_URL)
+//            .post(body)
+//            .addHeader("Authorization", "key=" + "your server key")
+//            .build()
+//        val response: Response = mClient.newCall(request).execute()
+//        return response.body().string()
+//    }
+
+    // Notification
+    private fun sendNotification() {
+        val db = Firebase.firestore
+
+        val userID = firebaseAuth.uid!!
+
+        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
+            if (!task.isSuccessful) {
+                Log.w(TAG, "Fetching FCM registration token failed", task.exception)
+                return@OnCompleteListener
+            }
+
+            // Get new FCM registration token
+            val token = task.result
+
+            Toast.makeText(baseContext, token, Toast.LENGTH_SHORT).show()
+
+            println(token)
+
+            db.collection("users").document(userID)
+                .set(mapOf(
+                    "mobile_notification" to token
+                ), SetOptions.merge())
+
+            val message = FirebaseMessaging()
+
+            message.sendNotification()
+
+            val msgId = AtomicInteger()
+
+            FirebaseMessaging.getInstance().send(
+                RemoteMessage.Builder("$SENDER_ID@gcm.googleapis.com")
+                    .setMessageId(Integer.toString(msgId.incrementAndGet()))
+                    .addData("title", "Your complaint has been added")
+                    .addData("body", "You have successfully added a complaint")
+                    .addData("requireInteraction", "true")
+                    .build()
+            )
+
+        })
+
     }
 
     private fun dateOfIncident() {
