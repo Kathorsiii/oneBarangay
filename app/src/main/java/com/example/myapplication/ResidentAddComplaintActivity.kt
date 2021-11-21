@@ -15,6 +15,8 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.liveData
 import com.example.myapplication.databinding.ActivityResidentAddComplaintBinding
 import com.github.dhaval2404.imagepicker.ImagePicker
 import com.google.android.gms.tasks.OnCompleteListener
@@ -34,12 +36,15 @@ import kotlinx.android.synthetic.main.success_dialog_add_complaint.view.*
 import org.json.JSONArray
 import java.io.File
 import java.util.*
-import java.util.concurrent.atomic.AtomicInteger
-
+import retrofit2.Response
 
 class ResidentAddComplaintActivity : AppCompatActivity() {
 
+    private lateinit var notificationBody: NotificationBody
 
+    // Notification
+    var title = ""
+    var message = ""
 
     // Binding
     private lateinit var binding: ActivityResidentAddComplaintBinding
@@ -247,87 +252,31 @@ class ResidentAddComplaintActivity : AppCompatActivity() {
         }
     }
 
-    var mClient: OkHttpClient = OkHttpClient()
-    var refreshedToken = ""
-
-    var jsonArray: JSONArray = JSONArray()
-    //    jsonArray.put(refreshedToken)
-
-//    fun sendMessage(
-//        recipients: JSONArray?,
-//        title: String?,
-//        body: String?,
-//        icon: String?,
-//        message: String?,
-//    ) {
-//        @SuppressLint("StaticFieldLeak")
-//        object : AsyncTask<String?, String?, String?>() {
-//            @JvmName("doInBackground1")
-//            protected fun doInBackground(vararg params: String): String? {
-//                try {
-//                    val root = JSONObject()
-//                    val notification = JSONObject()
-//                    notification.put("body", body)
-//                    notification.put("title", title)
-//                    notification.put("icon", icon)
-//                    val data = JSONObject()
-//                    data.put("message", message)
-//                    root.put("notification", notification)
-//                    root.put("data", data)
-//                    root.put("registration_ids", recipients)
-//                    val result = postToFCM(root.toString())
-//                    Log.d("Main Activity", "Result: $result")
-//                    return result
-//                } catch (ex: Exception) {
-//                    ex.printStackTrace()
-//                }
-//                return null
-//            }
-//
-//            override fun onPostExecute(result: String?) {
-//                try {
-//                    val resultJson = JSONObject(result)
-//                    val success: Int
-//                    val failure: Int
-//                    success = resultJson.getInt("success")
-//                    failure = resultJson.getInt("failure")
-//                    Toast.makeText(this@ResidentAddComplaintActivity,
-//                        "Message Success: " + success + "Message Failed: " + failure,
-//                        Toast.LENGTH_LONG).show()
-//                } catch (e: JSONException) {
-//                    e.printStackTrace()
-//                    Toast.makeText(this@ResidentAddComplaintActivity,
-//                        "Message Failed, Unknown error occurred.",
-//                        Toast.LENGTH_LONG).show()
-//                }
-//            }
-//
-//            override fun doInBackground(vararg p0: String?): String? {
-//                TODO("Not yet implemented")
-//            }
-//        }.execute()
-//    }
-//
-//    @RequiresApi(Build.VERSION_CODES.N)
-//    @Throws(IOException::class)
-//    fun postToFCM(bodyString: String?): String {
-//        val FCM_MESSAGE_URL = "https://fcm.googleapis.com/fcm/send"
-//        val JSON = MediaType.parse("application/json; charset=utf-8")
-//        val body = RequestBody.create(JSON, bodyString)
-//        val request: Request = GestureDescription.Builder()
-//            .url(Url.FCM_MESSAGE_URL)
-//            .post(body)
-//            .addHeader("Authorization", "key=" + "your server key")
-//            .build()
-//        val response: Response = mClient.newCall(request).execute()
-//        return response.body().string()
-//    }
-
     // Notification
     private fun sendNotification() {
+        val firebaseUser = firebaseAuth.currentUser
+
         val db = Firebase.firestore
 
         val userID = firebaseAuth.uid!!
+
+        val notifService = NotificationRetrofitInstance
+            .getRetrofitInstance()
+            .create(NotificationRetrofitInterface::class.java)
+
+//        val response = notifService.sendNotification(NotificationBody)
+
+        val responseLiveData: LiveData<Response<NotificationBody>> = liveData {
+            val response = notifService.sendNotification(NotificationBody("Complaint Added Successfully",
+                "You have successfully added a complaint",
+                "ftGCuYHCQoOU09WKNJ3TXM:APA91bGGtT-pWf4I71kwuF3QIW15Jrctdy7ypdLAG3RmFSsPTAoVmQ3aTRKf9PcPwF2w3NyrKLyD_aKccr9YhMuXVUyqdxNh05qOewJpNu75BTYoqC_wF2UCXhm2qFqfsqkKfvFbKQ1J"))
+            emit(response)
+        }
+
+        responseLiveData.observe(this, {
+            notificationBody = it.body()!!
+            println(notificationBody)
+        })
 
         FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
             if (!task.isSuccessful) {
@@ -336,32 +285,28 @@ class ResidentAddComplaintActivity : AppCompatActivity() {
             }
 
             // Get new FCM registration token
-            val token = task.result
+            val token = task.result!!
 
-            Toast.makeText(baseContext, token, Toast.LENGTH_SHORT).show()
+            // Log and toast
+//            val generatedToken = getString(R.string.msg_token_fmt, token)
+//            Log.d(TAG, generatedToken)
+//            Toast.makeText(baseContext, generatedToken, Toast.LENGTH_SHORT).show()
 
-            println(token)
+//            println(generatedToken)
 
             db.collection("users").document(userID)
                 .set(mapOf(
-                    "mobile_notification" to token
+                    "mobile_notification" to token,
                 ), SetOptions.merge())
 
-            val message = FirebaseMessaging()
-
-            message.sendNotification()
-
-            val msgId = AtomicInteger()
-
-            FirebaseMessaging.getInstance().send(
-                RemoteMessage.Builder("$SENDER_ID@gcm.googleapis.com")
-                    .setMessageId(Integer.toString(msgId.incrementAndGet()))
-                    .addData("title", "Your complaint has been added")
-                    .addData("body", "You have successfully added a complaint")
-                    .addData("requireInteraction", "true")
-                    .build()
-            )
-
+            db.collection("users").document(userID)
+                .collection("notification")
+                .add(mapOf(
+                    "title" to title,
+                    "body" to message,
+                    "icon" to "https://storage.googleapis.com/onebarangay-malanday/assets/img/favicon/favicon.ico",
+                    "requireInteraction" to true
+                ))
         })
 
     }
