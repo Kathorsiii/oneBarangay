@@ -13,6 +13,10 @@ import androidx.lifecycle.liveData
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.R
+<<<<<<< master
+=======
+import com.example.myapplication.ViewComplaintActivity
+>>>>>>> feat[ocr]: implement ocr
 import com.example.myapplication.data.api.RetrofitInstance
 import com.example.myapplication.data.api.RetrofitInterface
 import com.example.myapplication.data.model.ocr.FamilyItem
@@ -52,9 +56,14 @@ class OcrResultActivity : AppCompatActivity() {
         actionBar.setDisplayHomeAsUpEnabled(true)
 
         val extras = intent.extras
+<<<<<<< master
         val filename = extras!!.getString("filename")!!
         // For Testing
         // val filename = "3.jpg"
+=======
+//        val filename = extras!!.getString("filename")!!
+        val filename = "3.jpg"
+>>>>>>> feat[ocr]: implement ocr
 
         val retService = RetrofitInstance
             .getRetrofitInstance()
@@ -99,7 +108,11 @@ class OcrResultActivity : AppCompatActivity() {
     private fun listItemClicked(family: FamilyItem) {
         Toast.makeText(
             this,
+<<<<<<< master
             family.first_name?.text,
+=======
+            family.first_name.text,
+>>>>>>> feat[ocr]: implement ocr
             Toast.LENGTH_LONG
         ).show()
     }
@@ -126,7 +139,11 @@ class OcrResultActivity : AppCompatActivity() {
                     dialog.dismiss()
                     dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
 
+<<<<<<< master
                     val intent = Intent(this, ViewOcrActivity::class.java)
+=======
+                    val intent = Intent(this, ViewComplaintActivity::class.java)
+>>>>>>> feat[ocr]: implement ocr
                     startActivity(intent)
                 }
             }

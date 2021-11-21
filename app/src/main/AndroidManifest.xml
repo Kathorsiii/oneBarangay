@@ -22,8 +22,20 @@
                 android:name=".views.ViewOcrActivity"
                 android:exported="true" />
         <activity
-                android:name=".AppointmentDisplayActivity"
-                android:exported="true" />
+            android:name=".AppointmentDisplayActivity"
+            android:exported="true" />
+        <activity
+                android:name=".views.OcrResultActivity"
+                android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".AnnouncementDisplayActivity"
+            android:exported="true" />
         <activity
                 android:name=".views.OcrResultActivity"
                 android:exported="true" />
@@ -31,14 +43,12 @@
                 android:name=".AnnouncementDisplayActivity"
                 android:exported="true" />
         <activity
-                android:name=".DataVisualizationActivity"
-                android:exported="true" />
-        <activity
-                android:name=".ComplaintDisplayActivity"
-                android:exported="true" />
-        <activity
                 android:name=".ServicesActivity"
                 android:exported="true" />
+        <activity
+            android:name=".ResidentReserveAppointmentActivity"
+            android:exported="true">
+        </activity>
         <activity
                 android:name=".ResidentUploadComplaintProofActivity"
                 android:exported="true" />
