@@ -19,14 +19,14 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
         <activity
-                android:name=".views.ViewOcrActivity"
-                android:exported="true" />
+            android:name=".views.ViewOcrActivity"
+            android:exported="true" />
         <activity
             android:name=".AppointmentDisplayActivity"
             android:exported="true" />
         <activity
-                android:name=".views.OcrResultActivity"
-                android:exported="true">
+            android:name=".views.OcrResultActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -37,18 +37,14 @@
             android:name=".AnnouncementDisplayActivity"
             android:exported="true" />
         <activity
-            android:name=".DataVisualizationActivity"
+            android:name=".ServicesActivity"
             android:exported="true" />
-        <activity
-            android:name=".ComplaintDisplayActivity"
-            android:exported="true" />
-        <activity
-                android:name=".ServicesActivity"
-                android:exported="true" />
         <activity
             android:name=".ResidentReserveAppointmentActivity"
-            android:exported="true">
-        </activity>
+            android:exported="true"></activity>
+        <activity
+            android:name=".ResidentUploadComplaintProofActivity"
+            android:exported="true" />
         <activity
             android:name=".ResidentAppointmentDetailsActivity"
             android:exported="true" />
@@ -57,6 +53,9 @@
             android:exported="true" />
         <activity
             android:name=".NotificationActivity"
+            android:exported="true" />
+        <activity
+            android:name=".DataVisualizationActivity"
             android:exported="true" />
         <activity
             android:name=".ViewAppointmentActivity"
@@ -82,11 +81,7 @@
         <activity
             android:name=".LoginActivity"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".ResidentAddComplaintActivity"
@@ -115,10 +110,11 @@
             </intent-filter>
         </service>
 
-        <service android:name=".FirebaseMessaging"
+        <service
+            android:name=".FirebaseMessaging"
             android:exported="false">
             <intent-filter>
-                <action android:name="android.intent.action.RESPOND_VIA_MESSAGE"/>
+                <action android:name="android.intent.action.RESPOND_VIA_MESSAGE" />
             </intent-filter>
         </service>
 
