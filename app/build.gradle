@@ -89,4 +89,6 @@ dependencies {
 
     // Google Cloud Storage
     implementation 'com.google.firebase:firebase-storage-ktx'
+
+    implementation 'com.squareup.okhttp3:okhttp:3.4.1'
 }

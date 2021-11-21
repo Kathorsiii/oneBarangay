@@ -167,5 +167,8 @@
 
     <string name="default_notification_channel_id">fcm_default_channel</string>
     <string name="msg_token_fmt">FCM registration Token: %s</string>
+    <string name="default_notification_channel_name">com.example.myapplication</string>
+    <string name="msg_notif_test">Test Message Notification</string>
+    <string name="msg_notif_test_failed">Test Failed Message Notification</string>
 
 </resources>

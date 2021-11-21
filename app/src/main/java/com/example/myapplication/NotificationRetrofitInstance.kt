@@ -1,4 +1,4 @@
-package com.example.myapplication.data.api
+package com.example.myapplication
 
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
@@ -6,7 +6,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class RetrofitInstance {
+class NotificationRetrofitInstance {
     companion object {
         private const val BASE_URL = "http://1a4d-180-190-212-169.ngrok.io/"
 
