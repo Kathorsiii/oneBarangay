@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        package="com.example.myapplication">
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.example.myapplication">
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -10,79 +10,71 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 
     <application
-            android:allowBackup="true"
-            android:icon="@mipmap/ic_launcher"
-            android:label="@string/app_name"
-            android:roundIcon="@mipmap/ic_launcher_round"
-            android:supportsRtl="true"
-            android:theme="@style/Theme.MyApplication"
-            android:usesCleartextTraffic="true"
-            tools:targetApi="m">
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.MyApplication"
+        android:usesCleartextTraffic="true"
+        tools:targetApi="m">
         <activity
-                android:name=".views.ViewOcrActivity"
-                android:exported="true" />
+            android:name=".views.ViewOcrActivity"
+            android:exported="true" />
         <activity
             android:name=".AppointmentDisplayActivity"
             android:exported="true" />
         <activity
-                android:name=".views.OcrResultActivity"
-                android:exported="true">
-        </activity>
+            android:name=".views.OcrResultActivity"
+            android:exported="true"></activity>
         <activity
             android:name=".AnnouncementDisplayActivity"
             android:exported="true" />
         <activity
-                android:name=".views.OcrResultActivity"
-                android:exported="true" />
-        <activity
-                android:name=".AnnouncementDisplayActivity"
-                android:exported="true" />
-        <activity
-                android:name=".ServicesActivity"
-                android:exported="true" />
+            android:name=".ServicesActivity"
+            android:exported="true" />
         <activity
             android:name=".ResidentReserveAppointmentActivity"
+            android:exported="true"></activity>
+        <activity
+            android:name=".ResidentUploadComplaintProofActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ResidentAppointmentDetailsActivity"
+            android:exported="true" />
+        <activity
+            android:name=".AnnouncementActivity"
+            android:exported="true" />
+        <activity
+            android:name=".NotificationActivity"
+            android:exported="true" />
+        <activity
+            android:name=".DataVisualizationActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ViewAppointmentActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ViewComplaintActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ScanDocumentActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ChangePasswordActivity"
+            android:exported="true" />
+        <activity
+            android:name=".AddBulkScheduleActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ProfileActivity"
+            android:exported="true" />
+        <activity
+            android:name=".SignUpActivity"
+            android:exported="true" />
+        <activity
+            android:name=".LoginActivity"
             android:exported="true">
-        </activity>
-        <activity
-                android:name=".ResidentUploadComplaintProofActivity"
-                android:exported="true" />
-        <activity
-                android:name=".ResidentReserveAppointmentActivity"
-                android:exported="true" />
-        <activity
-                android:name=".ResidentAppointmentDetailsActivity"
-                android:exported="true" />
-        <activity
-                android:name=".AnnouncementActivity"
-                android:exported="true" />
-        <activity
-                android:name=".NotificationActivity"
-                android:exported="true" />
-        <activity
-                android:name=".ViewAppointmentActivity"
-                android:exported="true" />
-        <activity
-                android:name=".ViewComplaintActivity"
-                android:exported="true" />
-        <activity
-                android:name=".ScanDocumentActivity"
-                android:exported="true" />
-        <activity
-                android:name=".ChangePasswordActivity"
-                android:exported="true" />
-        <activity
-                android:name=".AddBulkScheduleActivity"
-                android:exported="true" />
-        <activity
-                android:name=".ProfileActivity"
-                android:exported="true" />
-        <activity
-                android:name=".SignUpActivity"
-                android:exported="true" />
-        <activity
-                android:name=".LoginActivity"
-                android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -90,8 +82,8 @@
             </intent-filter>
         </activity>
         <activity
-                android:name=".ResidentAddComplaintActivity"
-                android:exported="true" />
+            android:name=".ResidentAddComplaintActivity"
+            android:exported="true" />
         <activity
             android:name=".MainActivity"
             android:exported="true" />
@@ -102,7 +94,6 @@
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_color"
             android:resource="@color/alphaBlue" />
-
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_channel_id"
             android:value="@string/default_notification_channel_id" />
@@ -115,14 +106,12 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
-
-        <service android:name=".FirebaseMessaging"
+        <service
+            android:name=".FirebaseMessaging"
             android:exported="false">
             <intent-filter>
-                <action android:name="android.intent.action.RESPOND_VIA_MESSAGE"/>
+                <action android:name="android.intent.action.RESPOND_VIA_MESSAGE" />
             </intent-filter>
         </service>
-
     </application>
-
 </manifest>

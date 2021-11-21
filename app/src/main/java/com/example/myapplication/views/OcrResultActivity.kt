@@ -1,10 +1,11 @@
-
 package com.example.myapplication.views
 
 import android.annotation.SuppressLint
 import android.app.AlertDialog
+import android.content.ContentValues.TAG
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import com.example.myapplication.R
 import android.widget.Toast
@@ -23,9 +24,9 @@ import com.example.myapplication.databinding.ActivityOcrResultBinding
 import com.google.firebase.firestore.SetOptions
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import kotlinx.android.synthetic.main.activity_ocr_result.*
 import kotlinx.android.synthetic.main.success_dialog_add_complaint.view.*
 import retrofit2.Response
-
 
 class OcrResultActivity : AppCompatActivity() {
 
@@ -53,9 +54,9 @@ class OcrResultActivity : AppCompatActivity() {
         actionBar.setDisplayHomeAsUpEnabled(true)
 
         val extras = intent.extras
-        val filename = extras!!.getString("filename")!!
+//        val filename = extras!!.getString("filename")!!
         // For Testing
-        // val filename = "3.jpg"
+        val filename = "3.jpg"
 //        val filename = extras!!.getString("filename")!!
 
         val retService = RetrofitInstance
@@ -73,6 +74,8 @@ class OcrResultActivity : AppCompatActivity() {
                     houseData = ocr.house_data
                     familyData = ocr.family_data
 
+                    println(houseData)
+
                     ocrAdapter = OcrAdapter(familyData
                     ) { selectedFamilyItem: FamilyItem ->
                         listItemClicked(selectedFamilyItem)
@@ -87,10 +90,51 @@ class OcrResultActivity : AppCompatActivity() {
                     Toast.makeText(this, e.message, Toast.LENGTH_LONG).show()
                 }
 //                initOcrResult()
+
             } else {
                 println(it.errorBody())
             }
         })
+
+        submitBtnOCR.setOnClickListener {
+            familyData.forEachIndexed { index, familyItem ->
+                println("Family Member $index -> $familyItem")
+            }
+
+            val db = Firebase.firestore
+            val houseNum = houseData[0].house_num.text
+
+            val houseRef = db.collection("rbi").document(houseNum)
+
+            familyData.forEach { familyItem ->
+                houseRef.collection("family")
+                    .add(familyItem)
+                    .addOnSuccessListener { documentReference ->
+                        Log.d(TAG, "DocumentSnapshot written with ID: ${documentReference.id}")
+
+                        val dialogView =
+                            View.inflate(this, R.layout.success_dialog_add_complaint, null)
+                        val builder = AlertDialog.Builder(this)
+                        builder.setView(dialogView)
+
+                        val dialog = builder.create()
+                        dialogView.dialog_message.text = "RBI has successfully been added!"
+                        dialog.show()
+
+                        dialogView.complaintOkBtn.setOnClickListener {
+                            dialog.dismiss()
+                            dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
+
+                            val intent = Intent(this, ViewOcrActivity::class.java)
+                            startActivity(intent)
+                        }
+                    }
+                    .addOnFailureListener { e ->
+                        Toast.makeText(this, "Error writing document $e", Toast.LENGTH_LONG).show()
+                    }
+            }
+
+        }
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -104,37 +148,5 @@ class OcrResultActivity : AppCompatActivity() {
             family.first_name?.text,
             Toast.LENGTH_LONG
         ).show()
-    }
-
-    fun submitBtnClicked(view: android.view.View) {
-        familyData.forEachIndexed { index, familyItem ->
-            println("Family Member $index -> $familyItem")
-        }
-
-        val db = Firebase.firestore
-        val houseNum = houseData[0].house_num.text
-        db.collection("rbi").document(houseNum)
-            .set(familyData, SetOptions.merge())
-            .addOnSuccessListener {
-                val dialogView = View.inflate(this, R.layout.success_dialog_add_complaint, null)
-                val builder = AlertDialog.Builder(this)
-                builder.setView(dialogView)
-
-                val dialog = builder.create()
-                dialogView.dialog_message.text = "RBI has successfully been added!"
-                dialog.show()
-
-                dialogView.complaintOkBtn.setOnClickListener {
-                    dialog.dismiss()
-                    dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
-
-                    val intent = Intent(this, ViewOcrActivity::class.java)
-                    startActivity(intent)
-                }
-            }
-
-            .addOnFailureListener { e ->
-                Toast.makeText(this, "Error writing document $e", Toast.LENGTH_LONG).show()
-            }
     }
 }
