@@ -79,18 +79,19 @@ class NotificationActivity : AppCompatActivity() {
 
 //        val response = notifService.sendNotification(NotificationBody)
 
-//        val responseLiveData: LiveData<Response<NotificationBody>> = liveData {
-//            val response = notifService.sendNotification(NotificationBody("Complaint Added Successfully",
-//                "You have successfully added a complaint",
-//                "ftGCuYHCQoOU09WKNJ3TXM:APA91bGGtT-pWf4I71kwuF3QIW15Jrctdy7ypdLAG3RmFSsPTAoVmQ3aTRKf9PcPwF2w3NyrKLyD_aKccr9YhMuXVUyqdxNh05qOewJpNu75BTYoqC_wF2UCXhm2qFqfsqkKfvFbKQ1J"))
-//            emit(response)
         val responseLiveData: LiveData<Response<NotificationBody>> = liveData {
             val response =
                 notifService.sendNotification(NotificationBody("Title Notification Activity",
                     "Message Notification Activity",
-                    "ftGCuYHCQoOU09WKNJ3TXM:APA91bGGtT-pWf4I71kwuF3QIW15Jrctdy7ypdLAG3RmFSsPTAoVmQ3aTRKf9PcPwF2w3NyrKLyD_aKccr9YhMuXVUyqdxNh05qOewJpNu75BTYoqC_wF2UCXhm2qFqfsqkKfvFbKQ1J"))
+                    "dOBHIOtFS0OvsTkW3LL_uy:APA91bHlP_HRRm7of1XFiuyLuA04cyJb071DZqdeuuIjcB_5VjY_R-7i-oUyGOrESW_XYOUUXkTWCTYs4DVfbES4NF6YpbKV0KqUh7OtDjKlXQMHpcLyiP5Kr_ZUnZAKE0tZebmXLo2G"))
             emit(response)
         }
+
+        // Pocophone Token
+        // dOBHIOtFS0OvsTkW3LL_uy:APA91bHlP_HRRm7of1XFiuyLuA04cyJb071DZqdeuuIjcB_5VjY_R-7i-oUyGOrESW_XYOUUXkTWCTYs4DVfbES4NF6YpbKV0KqUh7OtDjKlXQMHpcLyiP5Kr_ZUnZAKE0tZebmXLo2G
+
+        // Android Emulator Token
+        // ftGCuYHCQoOU09WKNJ3TXM:APA91bGGtT-pWf4I71kwuF3QIW15Jrctdy7ypdLAG3RmFSsPTAoVmQ3aTRKf9PcPwF2w3NyrKLyD_aKccr9YhMuXVUyqdxNh05qOewJpNu75BTYoqC_wF2UCXhm2qFqfsqkKfvFbKQ1J
 
         responseLiveData.observe(this, {
             notificationBody = it.body()!!
@@ -110,7 +111,7 @@ class NotificationActivity : AppCompatActivity() {
 //            val generatedToken = getString(R.string.msg_token_fmt, token)
 //            Log.d(TAG, generatedToken)
 //            Toast.makeText(baseContext, generatedToken, Toast.LENGTH_SHORT).show()
-
+//
 //            println(generatedToken)
 
             db.collection("users").document(userID)

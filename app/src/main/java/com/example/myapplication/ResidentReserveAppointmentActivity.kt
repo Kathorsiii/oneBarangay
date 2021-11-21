@@ -44,6 +44,7 @@ import kotlinx.android.synthetic.main.activity_resident_add_complaint.*
 import kotlinx.android.synthetic.main.notification.*
 import kotlinx.android.synthetic.main.success_dialog_add_complaint.view.*
 import android.app.*
+import kotlinx.android.synthetic.main.activity_resident_reserve_appointment.*
 
 class ResidentReserveAppointmentActivity : AppCompatActivity() {
 
@@ -87,7 +88,7 @@ class ResidentReserveAppointmentActivity : AppCompatActivity() {
 
         // Actionbar
         actionBar = supportActionBar!!
-        actionBar.title = "Reserve Appointment"
+        actionBar.title = "Schedule Appointment"
 
         // Back button
         actionBar.setDisplayHomeAsUpEnabled(true)
@@ -107,7 +108,8 @@ class ResidentReserveAppointmentActivity : AppCompatActivity() {
                     mapOf(
                         "document_name" to documentName,
                         "ready_issue" to false,
-                        "slugify" to documentName.toSlug()
+                        "slugify" to documentName.toSlug(),
+                        "info_status" to false
                     )
                 )
             }
@@ -134,6 +136,17 @@ class ResidentReserveAppointmentActivity : AppCompatActivity() {
 
             val userRef = db.collection("users").document(userID)
             var userData: Map<String, Any>
+
+//            db.collection("document_request").document(userID)
+//                .get()
+//                .addOnSuccessListener { document ->
+//                    Log.d(TAG, "${document.id} => ${document.data}")
+//                    binding.dateAndTimeText.visibility = View.VISIBLE
+//                    binding.dateAndTimeSelected.visibility = View.VISIBLE
+//                }
+//                .addOnFailureListener { exception ->
+//                    Log.w(TAG, "Error getting documents: ", exception)
+//                }
 
             userRef.get()
                 .addOnSuccessListener { document ->
@@ -165,25 +178,35 @@ class ResidentReserveAppointmentActivity : AppCompatActivity() {
                         docRequestRef.set(docRequestData, SetOptions.merge())
                             .addOnSuccessListener {
 
-                                val view = View.inflate(this@ResidentReserveAppointmentActivity,
-                                    R.layout.sucess_dialog_reserve_appointment,
-                                    null)
-                                val builder =
-                                    AlertDialog.Builder(this@ResidentReserveAppointmentActivity)
-                                builder.setView(view)
-                                val dialog = builder.create()
-                                dialog.show()
+                                userRef.collection("document_request").document(docRequestRef.id)
+                                    .set(docRequestData)
+                                    .addOnSuccessListener {
+                                        Log.d(TAG, "Document Request: Success")
 
-                                view.reserveAppt_ok_btn.setOnClickListener {
-                                    dialog.dismiss()
-                                    dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
+                                        val view =
+                                            View.inflate(this@ResidentReserveAppointmentActivity,
+                                                R.layout.sucess_dialog_reserve_appointment,
+                                                null)
+                                        val builder =
+                                            AlertDialog.Builder(this@ResidentReserveAppointmentActivity)
+                                        builder.setView(view)
+                                        val dialog = builder.create()
+                                        dialog.show()
 
-                                    val intent = Intent(this, ViewAppointmentActivity::class.java)
-                                    startActivity(intent)
-                                }
+                                        view.reserveAppt_ok_btn.setOnClickListener {
+                                            dialog.dismiss()
+                                            dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
 
-                                sendNotification()
+                                            val intent =
+                                                Intent(this, ViewAppointmentActivity::class.java)
+                                            startActivity(intent)
+                                        }
+                                        sendNotification()
+                                    }
 
+                                    .addOnFailureListener {
+                                        Log.d(TAG, "Document Request: Failure")
+                                    }
                             }
                             .addOnFailureListener { e ->
                                 Toast.makeText(
@@ -263,9 +286,10 @@ class ResidentReserveAppointmentActivity : AppCompatActivity() {
 //        val response = notifService.sendNotification(NotificationBody)
 
         val responseLiveData: LiveData<Response<NotificationBody>> = liveData {
-            val response = notifService.sendNotification(NotificationBody("Reserve Added Successfully",
-                "You have successfully scheduled a reservation",
-                "ftGCuYHCQoOU09WKNJ3TXM:APA91bGGtT-pWf4I71kwuF3QIW15Jrctdy7ypdLAG3RmFSsPTAoVmQ3aTRKf9PcPwF2w3NyrKLyD_aKccr9YhMuXVUyqdxNh05qOewJpNu75BTYoqC_wF2UCXhm2qFqfsqkKfvFbKQ1J"))
+            val response =
+                notifService.sendNotification(NotificationBody("Reserve Added Successfully",
+                    "You have successfully scheduled a reservation",
+                    "dOBHIOtFS0OvsTkW3LL_uy:APA91bHlP_HRRm7of1XFiuyLuA04cyJb071DZqdeuuIjcB_5VjY_R-7i-oUyGOrESW_XYOUUXkTWCTYs4DVfbES4NF6YpbKV0KqUh7OtDjKlXQMHpcLyiP5Kr_ZUnZAKE0tZebmXLo2G"))
             emit(response)
         }
 
@@ -287,7 +311,7 @@ class ResidentReserveAppointmentActivity : AppCompatActivity() {
 //            val generatedToken = getString(R.string.msg_token_fmt, token)
 //            Log.d(TAG, generatedToken)
 //            Toast.makeText(baseContext, generatedToken, Toast.LENGTH_SHORT).show()
-
+//
 //            println(generatedToken)
 
             db.collection("users").document(userID)

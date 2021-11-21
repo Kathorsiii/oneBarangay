@@ -113,9 +113,14 @@ class ResidentAddComplaintActivity : AppCompatActivity() {
         // Toast.makeText(this, "User ID: ${userID}", Toast.LENGTH_LONG).show()
         // println(userID)
 
+        uploadComplaintProofImage.setOnClickListener {
+            openImagePicker()
+        }
+
         // For Complaint Type Dropdown
         val complaintList = resources.getStringArray(R.array.complaint_list)
-        val complaintTypeAdapter = ArrayAdapter(this, R.layout.complaint_list_item, complaintList)
+        val complaintTypeAdapter =
+            ArrayAdapter(this, R.layout.complaint_list_item, complaintList)
         binding.complaintTypeInput.setAdapter(complaintTypeAdapter)
 
         // For Complaint Status Dropdown
@@ -143,15 +148,11 @@ class ResidentAddComplaintActivity : AppCompatActivity() {
                 // Toast.makeText(this, "Complaint Status: ${complaintStatusValue}", Toast.LENGTH_LONG).show()
             }
 
-        uploadComplaintProofImage.setOnClickListener {
-            openImagePicker()
-        }
-
         dateOfIncident()
 
-        val userRef = db.collection("users").document(userID)
+        val getUserRef = db.collection("users").document(userID)
 
-        userRef.get()
+        getUserRef.get()
             .addOnSuccessListener { document ->
                 if (document != null) {
                     userData = document.data!!
@@ -161,6 +162,8 @@ class ResidentAddComplaintActivity : AppCompatActivity() {
                     var lastName = userData["last_name"]
                     complainantName = "$firstName $lastName"
 
+                    // println(complainantName)
+
                     email = userData["email"] as String
                     contactNumber = userData["contact_number"] as String
                     address = userData["address"] as String
@@ -169,25 +172,37 @@ class ResidentAddComplaintActivity : AppCompatActivity() {
                     binding.complainantEmailInput.setText(email)
                     binding.complainantNumberInput.setText(contactNumber)
                     binding.complainantAddressInput.setText(address)
-
                 }
             }
 
         complaintDoneBtn.setOnClickListener {
-            val calendar = Calendar.getInstance()
-            calendar.set(
-                complaintYear,
-                complaintMonth,
-                complaintDay,
-                complaintHour,
-                complaintMinute
-            )
 
-            var complainantHouseNum = complainantHouseNumInput.text.toString()
-            var complainantNameText = complainantNameInput.text.toString()
-            var complainantNumber = complainantNumberInput.text.toString()
-            var complainantAddress = complainantAddressInput.text.toString()
-            var complaintReason = complaintReasonInput.text.toString()
+            val userRef = db.collection("users").document(userID)
+
+            userRef.get()
+                .addOnSuccessListener { document ->
+                    if (document != null) {
+                        userData = document.data!!
+
+                        // println(userData)
+                        var firstName = userData["first_name"]
+                        var lastName = userData["last_name"]
+                        complainantName = "$firstName $lastName"
+
+                        email = userData["email"] as String
+                        contactNumber = userData["contact_number"] as String
+                        address = userData["address"] as String
+
+                        var complaintReason = complaintReasonInput.text.toString()
+
+                        val calendar = Calendar.getInstance()
+                        calendar.set(
+                            complaintYear,
+                            complaintMonth,
+                            complaintDay,
+                            complaintHour,
+                            complaintMinute
+                        )
 
 //            Toast.makeText(this,
 //                "Complainant Name: ${complainantNameText}" +
@@ -200,54 +215,63 @@ class ResidentAddComplaintActivity : AppCompatActivity() {
 //                        "\nComplaint Type: ${complaintSelectedValue}",
 //                Toast.LENGTH_LONG).show()
 
-            val userComplaint = hashMapOf(
-                "address" to address,
-                "comment" to complaintReason,
-                "complainant_name" to complainantName,
-                "complaint_type" to complaintSelectedValue,
-                "complaint_status" to complaintStatusValue,
-                "contact_number" to contactNumber,
-                "date" to calendar.time,
-                "email" to email,
-                "house_num" to complainantHouseNum,
-                "image_url" to downloadUri.toString(),
-                "user_id" to userID,
-            )
+                        val complaintRef = db.collection("complaints").document()
 
-            val complaintRef = db.collection("complaints").document()
-            userComplaint["complaint_id"] = complaintRef.id
+                        val userComplaint = hashMapOf(
+                            "address" to address,
+                            "comment" to complaintReason,
+                            "complainant_name" to complainantName,
+                            "complaint_type" to complaintSelectedValue,
+                            "complaint_status" to complaintStatusValue,
+                            "contact_number" to contactNumber,
+                            "date" to calendar.time,
+                            "email" to email,
+//                            "house_num" to complainantHouseNum,
+                            "image_url" to downloadUri.toString(),
+                            "user_id" to userID,
+                            "complaint_id" to complaintRef.id
+                        )
 
-            // Add Complaint
-            complaintRef
-                .set(userComplaint, SetOptions.merge())
+                        // Add Complaint
+                        complaintRef.set(userComplaint, SetOptions.merge())
+                            .addOnSuccessListener {
+                                userRef.collection("complaints").document(complaintRef.id)
+                                    .set(userComplaint)
 
-                .addOnSuccessListener {
+                                    .addOnSuccessListener {
 
-                    Log.d(TAG, "DocumentSnapshot successfully written!")
+                                        Log.d(TAG, "DocumentSnapshot successfully written!")
 
-                    val view = View.inflate(this@ResidentAddComplaintActivity,
-                        R.layout.success_dialog_add_complaint,
-                        null)
-                    val builder = AlertDialog.Builder(this@ResidentAddComplaintActivity)
-                    builder.setView(view)
+                                        val view = View.inflate(this@ResidentAddComplaintActivity,
+                                            R.layout.success_dialog_add_complaint,
+                                            null)
+                                        val builder =
+                                            AlertDialog.Builder(this@ResidentAddComplaintActivity)
+                                        builder.setView(view)
 
-                    val dialog = builder.create()
-                    dialog.show()
+                                        val dialog = builder.create()
+                                        dialog.show()
 
-                    view.complaintOkBtn.setOnClickListener {
-                        dialog.dismiss()
-                        dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
+                                        view.complaintOkBtn.setOnClickListener {
+                                            dialog.dismiss()
+                                            dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
 
-                        val intent = Intent(this, ViewComplaintActivity::class.java)
-                        startActivity(intent)
+                                            val intent =
+                                                Intent(this, ViewComplaintActivity::class.java)
+                                            startActivity(intent)
+                                        }
+                                        sendNotification()
+                                    }
+                                    .addOnFailureListener { e ->
+                                        Log.w(TAG, "Error writing document", e)
+                                    }
+                            }
+                            .addOnFailureListener { e ->
+                                Log.w(TAG, "Error writing document", e)
+                            }
+                    } else {
+                        Toast.makeText(this, "No such document", Toast.LENGTH_LONG).show()
                     }
-
-                    sendNotification()
-
-                }
-
-                .addOnFailureListener { e ->
-                    Log.w(TAG, "Error writing document", e)
                 }
         }
     }
@@ -264,12 +288,11 @@ class ResidentAddComplaintActivity : AppCompatActivity() {
             .getRetrofitInstance()
             .create(NotificationRetrofitInterface::class.java)
 
-//        val response = notifService.sendNotification(NotificationBody)
-
         val responseLiveData: LiveData<Response<NotificationBody>> = liveData {
-            val response = notifService.sendNotification(NotificationBody("Complaint Added Successfully",
-                "You have successfully added a complaint",
-                "ftGCuYHCQoOU09WKNJ3TXM:APA91bGGtT-pWf4I71kwuF3QIW15Jrctdy7ypdLAG3RmFSsPTAoVmQ3aTRKf9PcPwF2w3NyrKLyD_aKccr9YhMuXVUyqdxNh05qOewJpNu75BTYoqC_wF2UCXhm2qFqfsqkKfvFbKQ1J"))
+            val response =
+                notifService.sendNotification(NotificationBody("Complaint Added Successfully",
+                    "You have successfully added a complaint",
+                    "dOBHIOtFS0OvsTkW3LL_uy:APA91bHlP_HRRm7of1XFiuyLuA04cyJb071DZqdeuuIjcB_5VjY_R-7i-oUyGOrESW_XYOUUXkTWCTYs4DVfbES4NF6YpbKV0KqUh7OtDjKlXQMHpcLyiP5Kr_ZUnZAKE0tZebmXLo2G"))
             emit(response)
         }
 
@@ -308,7 +331,6 @@ class ResidentAddComplaintActivity : AppCompatActivity() {
                     "requireInteraction" to true
                 ))
         })
-
     }
 
     private fun dateOfIncident() {

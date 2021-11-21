@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
         android:layout_marginTop="12dp"
-        android:text="Reserve Appointment"
+        android:text="Schedule Appointment"
         android:textColor="@color/black"
         android:textSize="26sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -39,7 +39,7 @@
             android:orientation="vertical">
 
             <LinearLayout
-                android:id="@+id/linearEventTitle4"
+                android:id="@+id/dateAndTimeText"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="32dp"
@@ -60,6 +60,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/dateAndTimeSelected"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
@@ -103,7 +104,7 @@
                     android:layout_width="36dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@string/typeofAppointment" />
+                    android:text="Document Type" />
             </LinearLayout>
 
             <LinearLayout
@@ -223,8 +224,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/verification"
-                    android:visibility="gone"
                     android:textStyle="bold"
+                    android:visibility="gone"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent" />
 
@@ -287,7 +288,7 @@
                     android:layout_marginStart="4dp"
                     android:backgroundTint="@color/alphaBlue"
                     android:drawableLeft="@drawable/check_icon"
-                    android:text="@string/reserveBtn"
+                    android:text="Done"
                     android:textAllCaps="false" />
 
             </LinearLayout>
