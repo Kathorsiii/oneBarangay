@@ -65,15 +65,15 @@
                 android:textAllCaps="false"
                 app:cornerRadius="8dp" />
 
-            <Button
-                android:id="@+id/notificationBtn"
-                style="@style/Widget.MaterialComponents.Button"
-                android:layout_width="@dimen/size_btn"
-                android:layout_height="wrap_content"
-                android:padding="15dp"
-                android:text="@string/notifications"
-                android:textAllCaps="false"
-                app:cornerRadius="8dp" />
+<!--            <Button-->
+<!--                android:id="@+id/notificationBtn"-->
+<!--                style="@style/Widget.MaterialComponents.Button"-->
+<!--                android:layout_width="@dimen/size_btn"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:padding="15dp"-->
+<!--                android:text="@string/notifications"-->
+<!--                android:textAllCaps="false"-->
+<!--                app:cornerRadius="8dp" />-->
 
             <Button
                 android:id="@+id/profileBtn"

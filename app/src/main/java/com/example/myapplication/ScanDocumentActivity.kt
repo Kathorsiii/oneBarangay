@@ -34,7 +34,11 @@ class ScanDocumentActivity : AppCompatActivity() {
 
         // Actionbar
         actionBar = supportActionBar!!
-        actionBar.title = "Scan Document"
+        actionBar.title = "OCR"
+
+        // Back button
+        actionBar.setDisplayHomeAsUpEnabled(true)
+
         binding.rlSelectImg.setOnClickListener {
             openImagePicker()
         }
@@ -84,11 +88,16 @@ class ScanDocumentActivity : AppCompatActivity() {
         }
     }
 
-
     private fun setViewVisibility() {
         binding.ivSelectedImg.visibility = View.VISIBLE
         binding.tvImgDetails.visibility = View.VISIBLE
         binding.scrollView.visibility = View.VISIBLE
         binding.llNoselectMessage.visibility = View.GONE
     }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
+    }
+
 }

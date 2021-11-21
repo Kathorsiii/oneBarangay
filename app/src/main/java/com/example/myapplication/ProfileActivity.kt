@@ -128,6 +128,9 @@ class ProfileActivity : AppCompatActivity() {
                         view.okay_update_btn.setOnClickListener {
                             dialog.dismiss()
                             dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
+
+                            val intent = Intent(this, MainActivity::class.java)
+                            startActivity(intent)
                         }
                     }
                     .addOnFailureListener {

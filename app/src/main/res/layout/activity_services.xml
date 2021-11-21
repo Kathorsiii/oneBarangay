@@ -87,14 +87,14 @@
                 app:cornerRadius="8dp" />
 
             <Button
-                android:id="@+id/scanDocuBtn"
+                android:id="@+id/ocrBtn"
                 style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                 android:layout_width="@dimen/box_size_btn"
                 android:layout_height="@dimen/box_size_btn"
                 android:layout_marginLeft="5dp"
                 android:drawableTop="@drawable/scan_document"
                 android:padding="15dp"
-                android:text="@string/sDocu"
+                android:text="OCR"
                 android:textAllCaps="false"
                 android:textColor="@android:color/black"
                 app:cornerRadius="8dp" />

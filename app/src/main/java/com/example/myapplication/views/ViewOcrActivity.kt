@@ -1,15 +1,18 @@
 package com.example.myapplication.views
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.myapplication.MainActivity
 import com.example.myapplication.data.model.FirestoreRBI
 import com.example.myapplication.databinding.ActivityViewOcrBinding
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import kotlinx.android.synthetic.main.activity_view_ocr.*
 
 class ViewOcrActivity : AppCompatActivity() {
     private lateinit var actionBar: ActionBar
@@ -28,8 +31,14 @@ class ViewOcrActivity : AppCompatActivity() {
         // Actionbar
         actionBar = supportActionBar!!
         actionBar.title = "View RBI"
+
         // Back button
-        actionBar.setDisplayHomeAsUpEnabled(true)
+        // actionBar.setDisplayHomeAsUpEnabled(true)
+
+        goBackHmBtn.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+        }
 
         rbiList = arrayListOf()
 
@@ -42,10 +51,10 @@ class ViewOcrActivity : AppCompatActivity() {
         getRBI()
     }
 
-    override fun onSupportNavigateUp(): Boolean {
-        onBackPressed()
-        return true
-    }
+//    override fun onSupportNavigateUp(): Boolean {
+//        onBackPressed()
+//        return true
+//    }
 
     private fun getRBI() {
         val db = Firebase.firestore

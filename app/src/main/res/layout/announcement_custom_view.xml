@@ -1,30 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:foreground="?android:attr/selectableItemBackground"
     android:clickable="true"
     android:focusable="true"
+    android:foreground="?android:attr/selectableItemBackground"
+    android:orientation="vertical"
     app:cardCornerRadius="@dimen/dimen_20dp"
-    app:cardUseCompatPadding="true"
     app:cardElevation="5dp"
+    app:cardUseCompatPadding="true"
     app:contentPadding="10dp">
 
     <RelativeLayout
         android:id="@+id/rl_announcement"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="16dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="16dp">
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/announcement_img"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="wrap_content"
+            android:layout_height="160dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
             android:src="@mipmap/ic_launcher"
             app:shapeAppearanceOverlay="@style/roundedSquare" />
 
@@ -32,11 +35,12 @@
             android:id="@+id/announcement_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/announcement_img"
             android:layout_marginStart="20dp"
-            android:layout_toEndOf="@+id/announcement_img"
+            android:layout_marginTop="10dp"
             android:text="Title"
-            android:textSize="16sp"
             android:textColor="@android:color/black"
+            android:textSize="16sp"
             android:textStyle="bold" />
 
         <TextView
@@ -45,8 +49,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/announcement_title"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="20dp"
-            android:layout_toEndOf="@+id/announcement_img"
+            android:layout_marginTop="10dp"
             android:text="Description"
             android:textColor="@android:color/black"
             android:textSize="14sp" />
@@ -57,8 +60,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/announcement_desc"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="20dp"
-            android:layout_toEndOf="@+id/announcement_img"
+            android:layout_marginTop="10dp"
             android:text="Creation Date"
             android:textColor="@android:color/black"
             android:textSize="14sp" />

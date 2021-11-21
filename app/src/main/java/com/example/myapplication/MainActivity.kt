@@ -26,10 +26,10 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        notificationBtn.setOnClickListener {
-            val intent = Intent(this, NotificationActivity::class.java)
-            startActivity(intent)
-        }
+//        notificationBtn.setOnClickListener {
+//            val intent = Intent(this, NotificationActivity::class.java)
+//            startActivity(intent)
+//        }
 
         profileBtn.setOnClickListener {
             val intent = Intent(this, ProfileActivity::class.java)

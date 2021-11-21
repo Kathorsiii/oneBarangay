@@ -37,7 +37,7 @@ class ServicesActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        scanDocuBtn.setOnClickListener {
+        ocrBtn.setOnClickListener {
             val intent = Intent(this, ScanDocumentActivity::class.java)
             startActivity(intent)
         }
