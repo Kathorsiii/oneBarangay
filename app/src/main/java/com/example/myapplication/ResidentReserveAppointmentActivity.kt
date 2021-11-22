@@ -53,6 +53,7 @@ class ResidentReserveAppointmentActivity : AppCompatActivity() {
     // Notification
     var title = ""
     var message = ""
+    private lateinit var userToken: String
 
     // Binding
     private lateinit var binding: ActivityResidentReserveAppointmentBinding
@@ -101,6 +102,41 @@ class ResidentReserveAppointmentActivity : AppCompatActivity() {
 
         // Init FirebaseAuth
         firebaseAuth = FirebaseAuth.getInstance()
+
+        val db = Firebase.firestore
+
+        val userID = firebaseAuth.uid!!
+
+        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
+            if (!task.isSuccessful) {
+                Log.w(TAG, "Fetching FCM registration token failed", task.exception)
+                return@OnCompleteListener
+            }
+
+            // Get new FCM registration token
+            userToken = task.result!!
+
+            // Log and toast
+//            val generatedToken = getString(R.string.msg_token_fmt, userToken)
+//            Log.d(TAG, generatedToken)
+//            Toast.makeText(baseContext, generatedToken, Toast.LENGTH_SHORT).show()
+////
+//            println(generatedToken)
+
+            db.collection("users").document(userID)
+                .set(mapOf(
+                    "mobile_notification" to userToken,
+                ), SetOptions.merge())
+
+            db.collection("users").document(userID)
+                .collection("notification")
+                .add(mapOf(
+                    "title" to title,
+                    "body" to message,
+                    "icon" to "https://storage.googleapis.com/onebarangay-malanday/assets/img/favicon/favicon.ico",
+                    "requireInteraction" to true
+                ))
+        })
 
         binding.reserveDoneBtn.setOnClickListener {
             for (documentName in documentNames) {
@@ -273,12 +309,6 @@ class ResidentReserveAppointmentActivity : AppCompatActivity() {
 
     // Notification
     private fun sendNotification() {
-        val firebaseUser = firebaseAuth.currentUser
-
-        val db = Firebase.firestore
-
-        val userID = firebaseAuth.uid!!
-
         val notifService = NotificationRetrofitInstance
             .getRetrofitInstance()
             .create(NotificationRetrofitInterface::class.java)
@@ -289,44 +319,13 @@ class ResidentReserveAppointmentActivity : AppCompatActivity() {
             val response =
                 notifService.sendNotification(NotificationBody("Reserve Added Successfully",
                     "You have successfully scheduled a reservation",
-                    "dOBHIOtFS0OvsTkW3LL_uy:APA91bHlP_HRRm7of1XFiuyLuA04cyJb071DZqdeuuIjcB_5VjY_R-7i-oUyGOrESW_XYOUUXkTWCTYs4DVfbES4NF6YpbKV0KqUh7OtDjKlXQMHpcLyiP5Kr_ZUnZAKE0tZebmXLo2G"))
+                    userToken))
             emit(response)
         }
 
         responseLiveData.observe(this, {
             notificationBody = it.body()!!
             println(notificationBody)
-        })
-
-        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
-            if (!task.isSuccessful) {
-                Log.w(TAG, "Fetching FCM registration token failed", task.exception)
-                return@OnCompleteListener
-            }
-
-            // Get new FCM registration token
-            val token = task.result!!
-
-            // Log and toast
-//            val generatedToken = getString(R.string.msg_token_fmt, token)
-//            Log.d(TAG, generatedToken)
-//            Toast.makeText(baseContext, generatedToken, Toast.LENGTH_SHORT).show()
-//
-//            println(generatedToken)
-
-            db.collection("users").document(userID)
-                .set(mapOf(
-                    "mobile_notification" to token,
-                ), SetOptions.merge())
-
-            db.collection("users").document(userID)
-                .collection("notification")
-                .add(mapOf(
-                    "title" to title,
-                    "body" to message,
-                    "icon" to "https://storage.googleapis.com/onebarangay-malanday/assets/img/favicon/favicon.ico",
-                    "requireInteraction" to true
-                ))
         })
     }
 

@@ -101,6 +101,26 @@
 
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/viewOCRBTn"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="@dimen/box_size_btn"
+                android:layout_height="@dimen/box_size_btn"
+                android:drawableTop="@drawable/scan_document"
+                android:padding="15dp"
+                android:text="View OCR"
+                android:textAllCaps="false"
+                android:textColor="@android:color/black"
+                app:cornerRadius="8dp" />
+
+        </LinearLayout>
+
     </LinearLayout>
 
 

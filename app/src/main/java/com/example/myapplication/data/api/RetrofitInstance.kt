@@ -8,7 +8,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class RetrofitInstance {
     companion object {
-        private const val BASE_URL = "http://1a4d-180-190-212-169.ngrok.io/"
+        private const val BASE_URL = "http://560c-180-190-212-169.ngrok.io/"
 
         private val interceptor = HttpLoggingInterceptor().apply {
             this.level = HttpLoggingInterceptor.Level.BODY

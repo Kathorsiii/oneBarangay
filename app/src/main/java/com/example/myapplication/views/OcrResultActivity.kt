@@ -15,6 +15,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.myapplication.MainActivity
 import com.example.myapplication.data.api.RetrofitInstance
 import com.example.myapplication.data.api.RetrofitInterface
 import com.example.myapplication.data.model.ocr.FamilyItem
@@ -27,6 +28,7 @@ import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_ocr_result.*
 import kotlinx.android.synthetic.main.success_dialog_add_complaint.view.*
 import retrofit2.Response
+import java.util.*
 
 class OcrResultActivity : AppCompatActivity() {
 
@@ -56,8 +58,13 @@ class OcrResultActivity : AppCompatActivity() {
         val extras = intent.extras
 //        val filename = extras!!.getString("filename")!!
         // For Testing
-        val filename = "3.jpg"
-//        val filename = extras!!.getString("filename")!!
+        // val filename = "3.jpg"
+        val filename = extras!!.getString("filename")!!
+
+        cancelBtnOCR.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+        }
 
         val retService = RetrofitInstance
             .getRetrofitInstance()
@@ -104,36 +111,53 @@ class OcrResultActivity : AppCompatActivity() {
             val db = Firebase.firestore
             val houseNum = houseData[0].house_num.text
 
+            val houseDate = houseData[0].date_accomplished.text
+
+            val address = houseData[0].address.text
+
+//            val familyName = familyData[0].last_name.text
+
+            val currentTime = Calendar.getInstance().time
+            println(currentTime)
+
             val houseRef = db.collection("rbi").document(houseNum)
+
+            houseRef.set(
+                mapOf(
+                    "address" to address,
+                    "date_accomplished" to currentTime,
+                    "house_num" to houseNum,
+                    "family_name" to "Garon"
+                )
+            )
 
             familyData.forEach { familyItem ->
                 houseRef.collection("family")
                     .add(familyItem)
                     .addOnSuccessListener { documentReference ->
                         Log.d(TAG, "DocumentSnapshot written with ID: ${documentReference.id}")
-
-                        val dialogView =
-                            View.inflate(this, R.layout.success_dialog_add_complaint, null)
-                        val builder = AlertDialog.Builder(this)
-                        builder.setView(dialogView)
-
-                        val dialog = builder.create()
-                        dialogView.dialog_message.text = "RBI has successfully been added!"
-                        dialog.show()
-
-                        dialogView.complaintOkBtn.setOnClickListener {
-                            dialog.dismiss()
-                            dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
-
-                            val intent = Intent(this, ViewOcrActivity::class.java)
-                            startActivity(intent)
-                        }
                     }
                     .addOnFailureListener { e ->
                         Toast.makeText(this, "Error writing document $e", Toast.LENGTH_LONG).show()
                     }
             }
 
+            val dialogView =
+                View.inflate(this, R.layout.success_dialog_add_complaint, null)
+            val builder = AlertDialog.Builder(this)
+            builder.setView(dialogView)
+
+            val dialog = builder.create()
+            dialogView.dialog_message.text = "RBI has successfully been added!"
+            dialog.show()
+
+            dialogView.complaintOkBtn.setOnClickListener {
+                dialog.dismiss()
+                dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
+
+                val intent = Intent(this, ViewOcrActivity::class.java)
+                startActivity(intent)
+            }
         }
     }
 

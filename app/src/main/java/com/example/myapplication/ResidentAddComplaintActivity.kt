@@ -45,6 +45,7 @@ class ResidentAddComplaintActivity : AppCompatActivity() {
     // Notification
     var title = ""
     var message = ""
+    private lateinit var userToken: String
 
     // Binding
     private lateinit var binding: ActivityResidentAddComplaintBinding
@@ -116,6 +117,37 @@ class ResidentAddComplaintActivity : AppCompatActivity() {
         uploadComplaintProofImage.setOnClickListener {
             openImagePicker()
         }
+
+        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
+            if (!task.isSuccessful) {
+                Log.w(TAG, "Fetching FCM registration token failed", task.exception)
+                return@OnCompleteListener
+            }
+
+            // Get new FCM registration token
+            userToken = task.result!!
+
+            // Log and toast
+//            val generatedToken = getString(R.string.msg_token_fmt, userToken)
+//            Log.d(TAG, generatedToken)
+//            Toast.makeText(baseContext, generatedToken, Toast.LENGTH_SHORT).show()
+////
+//            println(generatedToken)
+
+            db.collection("users").document(userID)
+                .set(mapOf(
+                    "mobile_notification" to userToken,
+                ), SetOptions.merge())
+
+            db.collection("users").document(userID)
+                .collection("notification")
+                .add(mapOf(
+                    "title" to title,
+                    "body" to message,
+                    "icon" to "https://storage.googleapis.com/onebarangay-malanday/assets/img/favicon/favicon.ico",
+                    "requireInteraction" to true
+                ))
+        })
 
         // For Complaint Type Dropdown
         val complaintList = resources.getStringArray(R.array.complaint_list)
@@ -276,14 +308,9 @@ class ResidentAddComplaintActivity : AppCompatActivity() {
         }
     }
 
+
     // Notification
     private fun sendNotification() {
-        val firebaseUser = firebaseAuth.currentUser
-
-        val db = Firebase.firestore
-
-        val userID = firebaseAuth.uid!!
-
         val notifService = NotificationRetrofitInstance
             .getRetrofitInstance()
             .create(NotificationRetrofitInterface::class.java)
@@ -292,44 +319,13 @@ class ResidentAddComplaintActivity : AppCompatActivity() {
             val response =
                 notifService.sendNotification(NotificationBody("Complaint Added Successfully",
                     "You have successfully added a complaint",
-                    "dOBHIOtFS0OvsTkW3LL_uy:APA91bHlP_HRRm7of1XFiuyLuA04cyJb071DZqdeuuIjcB_5VjY_R-7i-oUyGOrESW_XYOUUXkTWCTYs4DVfbES4NF6YpbKV0KqUh7OtDjKlXQMHpcLyiP5Kr_ZUnZAKE0tZebmXLo2G"))
+                    userToken))
             emit(response)
         }
 
         responseLiveData.observe(this, {
             notificationBody = it.body()!!
             println(notificationBody)
-        })
-
-        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
-            if (!task.isSuccessful) {
-                Log.w(TAG, "Fetching FCM registration token failed", task.exception)
-                return@OnCompleteListener
-            }
-
-            // Get new FCM registration token
-            val token = task.result!!
-
-            // Log and toast
-//            val generatedToken = getString(R.string.msg_token_fmt, token)
-//            Log.d(TAG, generatedToken)
-//            Toast.makeText(baseContext, generatedToken, Toast.LENGTH_SHORT).show()
-
-//            println(generatedToken)
-
-            db.collection("users").document(userID)
-                .set(mapOf(
-                    "mobile_notification" to token,
-                ), SetOptions.merge())
-
-            db.collection("users").document(userID)
-                .collection("notification")
-                .add(mapOf(
-                    "title" to title,
-                    "body" to message,
-                    "icon" to "https://storage.googleapis.com/onebarangay-malanday/assets/img/favicon/favicon.ico",
-                    "requireInteraction" to true
-                ))
         })
     }
 

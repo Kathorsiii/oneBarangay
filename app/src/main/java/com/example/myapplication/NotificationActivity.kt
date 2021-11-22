@@ -37,6 +37,8 @@ class NotificationActivity : AppCompatActivity() {
     // FirebaseAuth
     private lateinit var firebaseAuth: FirebaseAuth
 
+    private lateinit var userToken: String
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_notification)
@@ -57,12 +59,41 @@ class NotificationActivity : AppCompatActivity() {
 
         val userID = firebaseAuth.uid!!
 
+        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
+            if (!task.isSuccessful) {
+                Log.w(TAG, "Fetching FCM registration token failed", task.exception)
+                return@OnCompleteListener
+            }
+
+            // Get new FCM registration token
+            userToken = task.result!!
+
+            // Log and toast
+//            val generatedToken = getString(R.string.msg_token_fmt, userToken)
+//            Log.d(TAG, generatedToken)
+//            Toast.makeText(baseContext, generatedToken, Toast.LENGTH_SHORT).show()
+////
+//            println(generatedToken)
+
+            db.collection("users").document(userID)
+                .set(mapOf(
+                    "mobile_notification" to userToken,
+                ), SetOptions.merge())
+
+            db.collection("users").document(userID)
+                .collection("notification")
+                .add(mapOf(
+                    "title" to title,
+                    "body" to message,
+                    "icon" to "https://storage.googleapis.com/onebarangay-malanday/assets/img/favicon/favicon.ico",
+                    "requireInteraction" to true
+                ))
+        })
+
         notifBtn.setOnClickListener {
 
             sendNotifications()
-
         }
-
     }
 
     private fun sendNotifications() {
@@ -83,7 +114,7 @@ class NotificationActivity : AppCompatActivity() {
             val response =
                 notifService.sendNotification(NotificationBody("Title Notification Activity",
                     "Message Notification Activity",
-                    "dOBHIOtFS0OvsTkW3LL_uy:APA91bHlP_HRRm7of1XFiuyLuA04cyJb071DZqdeuuIjcB_5VjY_R-7i-oUyGOrESW_XYOUUXkTWCTYs4DVfbES4NF6YpbKV0KqUh7OtDjKlXQMHpcLyiP5Kr_ZUnZAKE0tZebmXLo2G"))
+                    userToken))
             emit(response)
         }
 
@@ -97,37 +128,15 @@ class NotificationActivity : AppCompatActivity() {
             notificationBody = it.body()!!
 //            println(notificationBody)
         })
+    }
 
-        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
-            if (!task.isSuccessful) {
-                Log.w(TAG, "Fetching FCM registration token failed", task.exception)
-                return@OnCompleteListener
-            }
+    fun onNewToken(token: String) {
+        Log.d(TAG, "Refreshed token: $token")
 
-            // Get new FCM registration token
-            val token = task.result!!
-
-            // Log and toast
-//            val generatedToken = getString(R.string.msg_token_fmt, token)
-//            Log.d(TAG, generatedToken)
-//            Toast.makeText(baseContext, generatedToken, Toast.LENGTH_SHORT).show()
-//
-//            println(generatedToken)
-
-            db.collection("users").document(userID)
-                .set(mapOf(
-                    "mobile_notification" to token,
-                ), SetOptions.merge())
-
-            db.collection("users").document(userID)
-                .collection("notification")
-                .add(mapOf(
-                    "title" to title,
-                    "body" to message,
-                    "icon" to "https://storage.googleapis.com/onebarangay-malanday/assets/img/favicon/favicon.ico",
-                    "requireInteraction" to true
-                ))
-        })
+        // If you want to send messages to this application instance or
+        // manage this apps subscriptions on the server side, send the
+        // FCM registration token to your app server.
+//        sendRegistrationToServer(token)
     }
 
     override fun onSupportNavigateUp(): Boolean {

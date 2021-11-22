@@ -21,7 +21,6 @@ class ViewOcrActivity : AppCompatActivity() {
     private lateinit var rbiList: ArrayList<FirestoreRBI>
     private lateinit var rbiAdapter: RbiAdapter
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityViewOcrBinding.inflate(layoutInflater)
